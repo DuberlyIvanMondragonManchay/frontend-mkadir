@@ -7,7 +7,7 @@ export default function CarrouselComponent() {
         <div className='flex items-end justify-center px-2 pt-2'>
             <div>
                 <p className='mb-5 text-white text-lg'>Registra tu restaurante y administralo</p>
-                <p className='bg-gray-300 p-3 mb-2 text-center rounded'><Link  to="/register">Registrar</Link></p>
+                <p className='bg-gray-300 p-3 mb-2 text-center rounded'><Link  to="/register/options">Registrar</Link></p>
             </div>
             <img src={homeroCheff} alt="Imagen homero cheff" />
         </div>

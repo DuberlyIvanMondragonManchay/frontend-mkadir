@@ -17,24 +17,9 @@ export default function HomePage() {
   // FILTER DATA
   const results = !search ? restaurants : restaurants.filter((dato)=>dato.name.toLowerCase().includes(search.toLowerCase()))
 
-
   useEffect(()=>{
     showData()
   },[])
-
-
-
-
-  // useEffect(()=>{
-  //   async function getRestaurants() {
-  //     const res = await getResturantsRequest()
-  //     setRestaurants(res.data)
-  //   }
-  //   if(restaurants.length <=0){
-  //     getRestaurants()
-  //   }
-  // },[restaurants])
-
 
   return (
     <div className='m-2 mt-4'>
