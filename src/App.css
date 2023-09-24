@@ -1,0 +1,10 @@
+:root{
+    --color-primary: #307A59;
+}
+
+.color-text-primary {
+    color: var(--color-primary);
+}
+.bg-color-primary {
+    background: var(--color-primary);
+}
