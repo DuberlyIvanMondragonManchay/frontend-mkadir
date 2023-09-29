@@ -9,7 +9,7 @@ import RegisterOptions from './pages/register/RegisterOptions'
 import { AuthProvider } from './context/AuthContext'
 import { RegisterProvider } from './context/RegisterContext'
 
-// FOMRS
+// FORMS
 import FormRegisterPersonalAccount from './components/fomrs/FormRegisterPersonalAccount'
 import FormRegisterPersonalData from './components/fomrs/FormRegisterPersonalData'
 export default function App() {

@@ -22,7 +22,7 @@ export function RegisterProvider({ children }) {
   }, [errorsRegister]);
 
   return (
-    <RegisterContext.Provider value={{setUserRegister,userRegister,setRestaurantRegister,restaurantRegister}}>
+    <RegisterContext.Provider value={{errorsRegister,setUserRegister,userRegister,setRestaurantRegister,restaurantRegister}}>
       {children}
     </RegisterContext.Provider>
   );
