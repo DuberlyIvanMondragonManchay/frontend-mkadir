@@ -38,6 +38,7 @@ export default function FormRegisterPersonalData() {
               placeholder="Escribe tus nombres"
               onChange={handleChange}
               value={values.name}
+              required={true}
             />
           </div>
 
@@ -50,6 +51,7 @@ export default function FormRegisterPersonalData() {
               placeholder="Escribe tus apellidos paternos"
               onChange={handleChange}
               value={values.paternal_surname}
+              required={true}
             />
           </div>
 
@@ -62,6 +64,7 @@ export default function FormRegisterPersonalData() {
               placeholder="Escribe tus apellidos maternos"
               onChange={handleChange}
               value={values.maternal_surname}
+              required={true}
             />
           </div>
 
@@ -73,6 +76,7 @@ export default function FormRegisterPersonalData() {
             placeholder="Escribe tu DNI"
             onChange={handleChange}
             value={values.dni}
+            required={true}
           />
           <ButtonPrimary
             disabled={isSubmitting}

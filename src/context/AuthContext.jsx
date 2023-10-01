@@ -11,12 +11,20 @@ export function AuthProvider({ children }) {
       try {
         const userData = await JSON.parse(window.localStorage.getItem('userRegister'))
         const restaurantData = await JSON.parse(window.localStorage.getItem('restaurantRegister'))
-        console.log(userData)
-        const res_user = await registerRequest(userData)
-        const res_restaurant = await createResturantsRequest({...restaurantData,user:res_user.data.id})
-        console.log(res_restaurant)
+        if(userData){
+          const res_user = await registerRequest(userData)
+          if(restaurantData){
+            const res_restaurant = await createResturantsRequest({...restaurantData,user:res_user.data.id})
+            console.log(res_restaurant)
+            // delete data from local Storage
+            window.localStorage.removeItem('restaurantRegister')
+          }
+          // delete data from local Storage
+          window.localStorage.removeItem('userRegister')
+        }
       } catch (error) {
         console.log(error.response.data)
+        setErrors(error.response.data)
       }
     } 
   // Eliminar errores despues de 5 segundos
@@ -30,7 +38,7 @@ export function AuthProvider({ children }) {
   }, [errors]);
 
   return (
-    <AuthContext.Provider value={{registerUserAuth}}>
+    <AuthContext.Provider value={{registerUserAuth,errors}}>
       {children}
     </AuthContext.Provider>
   );

@@ -8,10 +8,12 @@ import RegisterAsRestaurant from './pages/register/RegisterAsRestaurant'
 import RegisterOptions from './pages/register/RegisterOptions'
 import { AuthProvider } from './context/AuthContext'
 import { RegisterProvider } from './context/RegisterContext'
-
+// SUCCESSFULLY
+import {Successfully_1} from '../src/components/AlertsMessages'
 // FORMS
 import FormRegisterPersonalAccount from './components/fomrs/FormRegisterPersonalAccount'
 import FormRegisterPersonalData from './components/fomrs/FormRegisterPersonalData'
+import ProfilePageIndex from './pages/profile/ProfilePageIndex'
 export default function App() {
   return (
     <AuthProvider>
@@ -26,6 +28,9 @@ export default function App() {
             <Route path="personal-data" element={<FormRegisterPersonalData />} />
             <Route path="restaurant" element={<RegisterAsRestaurant />} />
           </Route>
+          <Route path='/successfully' element={<Successfully_1/>}/>
+          <Route path='/profile' element={<ProfilePageIndex/>}/>
+          <Route path='/*' element={<h1>Not found</h1>}/>
         </Routes>
       </RegisterProvider>
     </AuthProvider>

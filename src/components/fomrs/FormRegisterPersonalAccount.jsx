@@ -1,14 +1,16 @@
 import {Formik} from 'formik'
-import {json, useNavigate} from 'react-router-dom'
+import { Alert } from "@mui/material";
+import {useNavigate} from 'react-router-dom'
 import {ButtonPrimary,InputForm} from '../specific/ComponentsForm'
 import { useRegister } from '../../context/RegisterContext';
 import { useAuth } from '../../context/AuthContext';
 export default function FormRegisterPersonalAccount() {
   const navigateTo = useNavigate()
   const {setUserRegister,userRegister} = useRegister()
-  const {registerUserAuth} = useAuth()
+  const {registerUserAuth,errors} = useAuth()
   return (
     <div className="m-2">
+      {/* {errors.length <= 0 ? "" : <Alert className="mt-3" severity="error">{errors}</Alert>} */}
       <h2 className = "text-xl font-bold color-text-primary">Datos de la cuenta</h2>
 
     <Formik
@@ -24,13 +26,18 @@ export default function FormRegisterPersonalAccount() {
         const userdata = JSON.parse(window.localStorage.getItem('userRegister'))
         window.localStorage.setItem('userRegister',JSON.stringify({...userdata,...values,username:values.email}));        
         registerUserAuth()//register to database
-
-        // navigateTo('/register/personal-account')     
+        navigateTo('/profile')     
       }}
     >
       {({ values, handleChange, handleSubmit, isSubmitting }) => (
         <form onSubmit={handleSubmit}>
-
+          {Object.keys(errors).map((key, index) => (
+            errors[key].map((error, errorIndex) => (
+              <div key={errorIndex}>
+                <Alert className="mt-3" severity="error">{key}: {error}</Alert>
+              </div>
+            ))
+          ))}
           <div className="my-3">
             <label htmlFor="email">
               <b>Correo electrónico</b>
@@ -40,6 +47,7 @@ export default function FormRegisterPersonalAccount() {
               placeholder="Escribe tu correo electrónico"
               onChange={handleChange}
               value={values.email}
+              required={true}
             />
           </div>
 
@@ -52,6 +60,7 @@ export default function FormRegisterPersonalAccount() {
               placeholder="Escribe tu contraseña"
               onChange={handleChange}
               value={values.password}
+              required={true}
             />
           </div>
 
@@ -64,6 +73,7 @@ export default function FormRegisterPersonalAccount() {
               placeholder="Confirma tu contraseña"
               onChange={handleChange}
               value={values.confirm_password}
+              required={true}
             />
           </div>
           <ButtonPrimary
