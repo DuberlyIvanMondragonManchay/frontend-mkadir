@@ -4,21 +4,25 @@ import { Formik } from "formik";
 import {ButtonPrimary,InputForm} from '../../components/specific/ComponentsForm'
 import { useRegister } from '../../context/RegisterContext';
 export default function FormRegisterPersonalData() {
-  const {setUserRegister} = useRegister()
+  const {setUserRegister,userRegister} = useRegister()
   const navigateTo = useNavigate()
+  const userPictureDefault = "https://firebasestorage.googleapis.com/v0/b/dimm-d6925.appspot.com/o/mkadir%2Flogo_default_user.svg?alt=media&token=35f3ad13-f04f-4a8d-82c7-a07e820a1124&_gl=1*70o08d*_ga*MTMyODQ5MjUzOC4xNjkzMDA0NjQ1*_ga_CW55HF8NVT*MTY5NjE3NDM1NS4xOS4xLjE2OTYxNzQzOTAuMjUuMC4w"
   return (
     <div className="m-2">
+      <h2 className = "text-xl font-bold color-text-primary">Datos personales</h2>
+
     <Formik
       initialValues={{
-        name: "",
-        paternal_surname: "",
-        maternal_surname: "",
-        dni: "",
-        picture: "",
+        name: userRegister.name,
+        paternal_surname: userRegister.paternal_surname,
+        maternal_surname: userRegister.maternal_surname,
+        dni: userRegister.dni,
+        picture: userRegister.picture || userPictureDefault,
       }}
       onSubmit={async (values) => {
         console.log(values);
         setUserRegister(values);
+        window.localStorage.setItem('userRegister',JSON.stringify(values));
         navigateTo('/register/personal-account')
       }}
     >

@@ -1,22 +1,31 @@
 import {Formik} from 'formik'
-import {useNavigate} from 'react-router-dom'
+import {json, useNavigate} from 'react-router-dom'
 import {ButtonPrimary,InputForm} from '../specific/ComponentsForm'
 import { useRegister } from '../../context/RegisterContext';
+import { useAuth } from '../../context/AuthContext';
 export default function FormRegisterPersonalAccount() {
   const navigateTo = useNavigate()
-  const {setUserRegister} = useRegister()
+  const {setUserRegister,userRegister} = useRegister()
+  const {registerUserAuth} = useAuth()
   return (
     <div className="m-2">
+      <h2 className = "text-xl font-bold color-text-primary">Datos de la cuenta</h2>
+
     <Formik
       initialValues={{
-        email: "",
-        password: "",
+        email: userRegister.email || '',
+        password: userRegister.password || '',
+        username:userRegister.email || '',
         confirm_password: "",
       }}
       onSubmit={async (values) => {
-        console.log(values);
-        setUserRegister(values);
-        navigateTo('/register/personal-account')
+        setUserRegister({...userRegister,...values});
+  
+        const userdata = JSON.parse(window.localStorage.getItem('userRegister'))
+        window.localStorage.setItem('userRegister',JSON.stringify({...userdata,...values,username:values.email}));        
+        registerUserAuth()//register to database
+
+        // navigateTo('/register/personal-account')     
       }}
     >
       {({ values, handleChange, handleSubmit, isSubmitting }) => (

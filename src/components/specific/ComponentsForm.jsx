@@ -21,6 +21,8 @@ export const InputForm =(props)=>{
     placeholder={props.placeholder}
     name={props.name}
     onChange={props.onChange}
+    value={props.value}
+    required={props.required}
     />
 
   )

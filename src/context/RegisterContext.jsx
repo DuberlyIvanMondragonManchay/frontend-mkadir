@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { registerRequest } from "../api/auth.api";
 const RegisterContext = createContext();
 export function RegisterProvider({ children }) {
     const [userRegister, setUserRegister] = useState({
@@ -6,9 +7,15 @@ export function RegisterProvider({ children }) {
         paternal_surname: "",
         maternal_surname: "",
         dni: "",
-        picture: "",
+        picture: null,
+        email:"",
+        password:"",
     });
-    const [restaurantRegister, setRestaurantRegister] = useState(null);
+    const [restaurantRegister, setRestaurantRegister] = useState({
+      name:"",
+      address:"",
+      logo_url: null
+    });
     const [errorsRegister,setErrorsRegister] = useState([])
 
   // Eliminar errores despues de 5 segundos
@@ -20,9 +27,32 @@ export function RegisterProvider({ children }) {
       return () => clearTimeout(timer);
     }
   }, [errorsRegister]);
+  const register= async ()=>{
+    try {
+      const res = await registerRequest(userRegister)
+      console.log(res)
+    } catch (error) {
+      console.log(error.response.data)
+    }
+    console.log("Click en register")
+    // console.log(restaurantRegister)
+  }
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      const confirmationMessage = '¿Estás seguro de que quieres abandonar la página?';
+      event.returnValue = confirmationMessage; // Estándar para la mayoría de los navegadores
+      return confirmationMessage; // Necesario para algunos navegadores, por ejemplo, Firefox
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
 
   return (
-    <RegisterContext.Provider value={{errorsRegister,setUserRegister,userRegister,setRestaurantRegister,restaurantRegister}}>
+    <RegisterContext.Provider value={{errorsRegister,setUserRegister,userRegister,setRestaurantRegister,restaurantRegister,register}}>
       {children}
     </RegisterContext.Provider>
   );
