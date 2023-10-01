@@ -44,6 +44,7 @@ export default function FormRegisterPersonalAccount() {
             </label>
             <InputForm
               name="email"
+              type="email"
               placeholder="Escribe tu correo electrónico"
               onChange={handleChange}
               value={values.email}
@@ -57,6 +58,7 @@ export default function FormRegisterPersonalAccount() {
             </label>
             <InputForm
               name="password"
+              type="password"
               placeholder="Escribe tu contraseña"
               onChange={handleChange}
               value={values.password}
@@ -70,6 +72,7 @@ export default function FormRegisterPersonalAccount() {
             </label>
             <InputForm
               name="confirm_password"
+              type="password"
               placeholder="Confirma tu contraseña"
               onChange={handleChange}
               value={values.confirm_password}
