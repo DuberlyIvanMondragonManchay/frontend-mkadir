@@ -25,8 +25,12 @@ export default function FormRegisterPersonalAccount() {
   
         const userdata = JSON.parse(window.localStorage.getItem('userRegister'))
         window.localStorage.setItem('userRegister',JSON.stringify({...userdata,...values,username:values.email}));        
-        registerUserAuth()//register to database
-        navigateTo('/successfully')     
+        const res = registerUserAuth()//register to database
+        if(res){
+          navigateTo('/successfully')     
+        }else{
+          navigateTo('/error')     
+        }
       }}
     >
       {({ values, handleChange, handleSubmit, isSubmitting }) => (

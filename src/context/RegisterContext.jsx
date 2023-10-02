@@ -27,16 +27,6 @@ export function RegisterProvider({ children }) {
       return () => clearTimeout(timer);
     }
   }, [errorsRegister]);
-  const register= async ()=>{
-    try {
-      const res = await registerRequest(userRegister)
-      console.log(res)
-    } catch (error) {
-      console.log(error.response.data)
-    }
-    console.log("Click en register")
-    // console.log(restaurantRegister)
-  }
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {
@@ -52,7 +42,7 @@ export function RegisterProvider({ children }) {
   }, []);
 
   return (
-    <RegisterContext.Provider value={{errorsRegister,setUserRegister,userRegister,setRestaurantRegister,restaurantRegister,register}}>
+    <RegisterContext.Provider value={{errorsRegister,setUserRegister,userRegister,setRestaurantRegister,restaurantRegister}}>
       {children}
     </RegisterContext.Provider>
   );

@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export const ButtonPrimary=(props) =>{
+  // useEffect(()=>{
+  // },[props.disabled])
   return (
     <button
     type= {props.type? props.type : "submit"}
-    className="mt-6 bg-color-primary w-full py-3 text-white rounded-xl md:rounded-xl"
+    className={`mt-6 ${props.disabled ?"bg-green-200 color-text" : "bg-color-primary text-white"} w-full py-3  rounded-xl md:rounded-xl`}
     disabled = {props.disabled ? props.disabled : false}
     >
     {props.text}
@@ -24,6 +26,5 @@ export const InputForm =(props)=>{
     value={props.value}
     required={props.required}
     />
-
   )
 }

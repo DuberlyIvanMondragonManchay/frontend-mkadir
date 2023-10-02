@@ -15,15 +15,17 @@ export function AuthProvider({ children }) {
           const res_user = await registerRequest(userData)
           if(restaurantData){
             const res_restaurant = await createResturantsRequest({...restaurantData,user:res_user.data.id})
-            console.log(res_restaurant)
             // delete data from local Storage
             window.localStorage.removeItem('restaurantRegister')
+            window.localStorage.removeItem('image_name')
+            window.localStorage.removeItem('userRegister')
+            return res_restaurant.data
           }
           // delete data from local Storage
           window.localStorage.removeItem('userRegister')
+          return res_user.data
         }
       } catch (error) {
-        console.log(error.response.data)
         setErrors(error.response.data)
       }
     } 

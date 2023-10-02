@@ -20,7 +20,6 @@ export default function FormRegisterPersonalData() {
         picture: userRegister.picture || userPictureDefault,
       }}
       onSubmit={async (values) => {
-        console.log(values);
         setUserRegister(values);
         window.localStorage.setItem('userRegister',JSON.stringify(values));
         navigateTo('/register/personal-account')
