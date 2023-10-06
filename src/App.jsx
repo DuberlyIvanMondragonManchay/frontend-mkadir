@@ -14,6 +14,10 @@ import {Successfully_1} from '../src/components/AlertsMessages'
 import FormRegisterPersonalAccount from './components/fomrs/FormRegisterPersonalAccount'
 import FormRegisterPersonalData from './components/fomrs/FormRegisterPersonalData'
 import ProfilePageIndex from './pages/profile/ProfilePageIndex'
+import Navigation from './components/Navigation'
+import RestaurantDetailsPage from './pages/restaurant/RestaurantDetailsPage'
+import Location from './components/restaurat/Location'
+import Menu from './components/restaurat/Menu'
 export default function App() {
   return (
     <AuthProvider>
@@ -30,8 +34,15 @@ export default function App() {
           </Route>
           <Route path='/successfully' element={<Successfully_1/>}/>
           <Route path='/profile' element={<ProfilePageIndex/>}/>
+
+          <Route path='/restaurant/details/:name/:id/' element={<RestaurantDetailsPage/>}>
+            <Route path='menu' element={<Menu/>}/>
+            <Route path='location' element={<Location/>}/>
+          </Route>
+          
           <Route path='/*' element={<h1>Not found</h1>}/>
         </Routes>
+        <Navigation/>
       </RegisterProvider>
     </AuthProvider>
   )

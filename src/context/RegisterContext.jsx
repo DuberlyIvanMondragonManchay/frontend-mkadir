@@ -28,19 +28,6 @@ export function RegisterProvider({ children }) {
     }
   }, [errorsRegister]);
 
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      const confirmationMessage = '¿Estás seguro de que quieres abandonar la página?';
-      event.returnValue = confirmationMessage; // Estándar para la mayoría de los navegadores
-      return confirmationMessage; // Necesario para algunos navegadores, por ejemplo, Firefox
-    };
-
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, []);
-
   return (
     <RegisterContext.Provider value={{errorsRegister,setUserRegister,userRegister,setRestaurantRegister,restaurantRegister}}>
       {children}
