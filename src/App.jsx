@@ -42,6 +42,7 @@ export default function App() {
           
           <Route path='/*' element={<h1>Not found</h1>}/>
         </Routes>
+        <div className='py-5'></div>
         <Navigation/>
       </RegisterProvider>
     </AuthProvider>

@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react'
 import CarrouselComponent from '../components/CarrouselComponent'
 import SearchComponent from '../components/SearchComponent'
-import CardRestaurant from '../components/CardRestaurant'
+import CardRestaurant from '../components/cards/CardRestaurant'
 import { getResturantsRequest } from '../api/Restaurant.pi'
 export default function HomePage() {
   const [restaurants,setRestaurants] = useState([])
@@ -33,6 +33,7 @@ export default function HomePage() {
           card_img={restaurant.logo_url}
           card_title={restaurant.name}
           LinkTo={`/restaurant/details/${restaurant.name}/${restaurant.id}/menu`}
+          is_open={restaurant.is_open}
           />
         ))}
         

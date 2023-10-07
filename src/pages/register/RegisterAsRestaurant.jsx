@@ -77,10 +77,12 @@ export default function RegisterAsRestaurant() {
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit}>
             <div className="my-3 flex justify-center">
+              
               <label htmlFor="logo_url" style={{ width: "100px", height:"100px" }} className="border flex  rounded-full overflow-hidden bg-gray-400 cursor-pointer">
                 <img className="m-auto" src={loading ? loading_picture : imageUrl ? imageUrl:img_resturant_default} alt="imagen-logo" />
               </label>
             </div>
+
             <div className="my-3 ">
               <label htmlFor="logo_url">
                 <b>Logo del restaurante</b>
