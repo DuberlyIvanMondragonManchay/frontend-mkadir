@@ -6,7 +6,6 @@ import { getResturantsRequest } from '../api/Restaurant.pi'
 export default function HomePage() {
   const [restaurants,setRestaurants] = useState([])
   const [search,setSearch] = useState('')
-
   const showData = async()=>{
     const res = await getResturantsRequest()
     setRestaurants(res.data)

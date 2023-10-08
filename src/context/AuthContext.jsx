@@ -1,11 +1,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { loginRequest, registerRequest } from "../api/auth.api";
+import { getUserRequest, loginRequest, registerRequest } from "../api/auth.api";
 import { createResturantsRequest } from "../api/Restaurant.pi";
+// import Cookies from 'universal-cookie';
+
 const AuthContext = createContext();
 export function AuthProvider({ children }) {
+    // const cookies = new Cookies()
     const [user, setUser] = useState(null);
-    const [restaurant, setRestaurant] = useState(null);
     const [errors,setErrors] = useState([])
+
 
     const registerUserAuth = async ()=> {
       try {
@@ -49,8 +52,18 @@ export function AuthProvider({ children }) {
     }
   }, [errors]);
 
+  const verifyUser=async ()=> {
+    const res = await getUserRequest()
+    setUser(res.data)
+  }
+  useEffect(()=> {
+    if(user==null){
+      verifyUser()
+    }
+  },[user])
+
   return (
-    <AuthContext.Provider value={{registerUserAuth,errors,loginUserAuth}}>
+    <AuthContext.Provider value={{registerUserAuth,errors,loginUserAuth,user}}>
       {children}
     </AuthContext.Provider>
   );
