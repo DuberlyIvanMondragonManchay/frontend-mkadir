@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { registerRequest } from "../api/auth.api";
+import { loginRequest, registerRequest } from "../api/auth.api";
 import { createResturantsRequest } from "../api/Restaurant.pi";
 const AuthContext = createContext();
 export function AuthProvider({ children }) {
@@ -7,7 +7,7 @@ export function AuthProvider({ children }) {
     const [restaurant, setRestaurant] = useState(null);
     const [errors,setErrors] = useState([])
 
-    const registerUserAuth = async ()=>{
+    const registerUserAuth = async ()=> {
       try {
         const userData = await JSON.parse(window.localStorage.getItem('userRegister'))
         const restaurantData = await JSON.parse(window.localStorage.getItem('restaurantRegister'))
@@ -29,6 +29,16 @@ export function AuthProvider({ children }) {
         setErrors(error.response.data)
       }
     } 
+
+    const loginUserAuth = async (user) => {
+      try {
+        const res = await loginRequest(user)
+        return res.data
+      } catch (error) {
+        setErrors(error.response.data)
+        console.log(error.response.data)
+      }
+    }
   // Eliminar errores despues de 5 segundos
   useEffect(() => {
     if (errors.length > 0) {
@@ -40,7 +50,7 @@ export function AuthProvider({ children }) {
   }, [errors]);
 
   return (
-    <AuthContext.Provider value={{registerUserAuth,errors}}>
+    <AuthContext.Provider value={{registerUserAuth,errors,loginUserAuth}}>
       {children}
     </AuthContext.Provider>
   );
