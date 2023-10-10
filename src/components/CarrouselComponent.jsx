@@ -9,7 +9,7 @@ export default function CarrouselComponent() {
         <div className={`flex items-${!user?"end":"center"} justify-center pl-2 pt-2`}>
             <div>
                 <p className='mb-5 text-white text-lg'>{!user?"¡Explora con tu cuenta hoy!":"¡Publica tu menú para que todos puedan verlo!"}</p>
-                <Link className='bg-gray-300 p-3 mb-2 text-center rounded block	' to="/login">¡{!user?"Iniciar sesion":"Publicar Menú"}!</Link>
+                <Link className='bg-gray-300 p-3 mb-2 text-center rounded block	' to="/auth/login">¡{!user?"Iniciar sesion":"Publicar Menú"}!</Link>
             </div>
             <img style={{ maxHeight:"200px" }} src={!user?homeroCheff:uploadMenu} alt="Imagen homero cheff" />
         </div>

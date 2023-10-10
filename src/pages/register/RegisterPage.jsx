@@ -2,8 +2,8 @@ import React ,{useEffect} from 'react'
 import {Navigate, Outlet,useLocation } from 'react-router-dom'
 export default function RegisterPage() {
   const use_location = useLocation()
-  if(use_location.pathname === "/register/" || use_location.pathname === "/register"){
-    return <Navigate to="/register/options" />
+  if(use_location.pathname === "/auth/register/" || use_location.pathname === "/register"){
+    return <Navigate to="/auth/register/options" />
   }
   useEffect(() => {
     const handleBeforeUnload = (event) => {

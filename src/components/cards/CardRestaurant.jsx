@@ -7,7 +7,10 @@ export default function CardRestaurant(props) {
               <img src={props.card_img} alt={`Imagen de ${props.title}`} className='w-100 h-100 object-cover' />
           </div>
           <div className='ml-4 w-full flex justify-between mr-3'>
-              <p className='text-lg font-bold text-gray-600'>{props.card_title}</p>
+              <div>
+                <p className='text-lg font-bold text-gray-600'>{props.card_title}</p>
+              </div>
+              
               <div className='flex items-center'>
                   <div className={`w-3 h-3 rounded-full mr-2 ${props.is_open ? 'bg-green-500' : 'bg-red-500'}`} />
                   <p>{props.is_open ? 'Abierto' : 'Cerrado'}</p>

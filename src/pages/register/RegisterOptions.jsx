@@ -4,8 +4,8 @@ import { ButtonPrimary } from '../../components/specific/ComponentsForm'
 export default function RegisterOptions() {
   return (
     <div>
-        <Link to="/register/restaurant"><ButtonPrimary type="button" text="Restaurante"/></Link>     
-        <Link to="/register/personal-data"><ButtonPrimary type="button" text="Cuenta personal"/></Link>     
+        <Link to="/auth/register/restaurant"><ButtonPrimary type="button" text="Restaurante"/></Link>     
+        <Link to="/auth/register/personal-data"><ButtonPrimary type="button" text="Cuenta personal"/></Link>     
     </div>
   )
 }

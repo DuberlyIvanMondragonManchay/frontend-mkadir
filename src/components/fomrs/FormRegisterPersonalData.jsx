@@ -22,7 +22,7 @@ export default function FormRegisterPersonalData() {
       onSubmit={async (values) => {
         setUserRegister(values);
         window.localStorage.setItem('userRegister',JSON.stringify(values));
-        navigateTo('/register/personal-account')
+        navigateTo('/auth/register/personal-account')
       }}
     >
       {({ values, handleChange, handleSubmit, isSubmitting }) => (

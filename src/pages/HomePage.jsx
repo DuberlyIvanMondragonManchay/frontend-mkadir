@@ -31,7 +31,7 @@ export default function HomePage() {
           key={index}
           card_img={restaurant.logo_url}
           card_title={restaurant.name}
-          LinkTo={`/restaurant/details/${restaurant.name}/${restaurant.id}/menu`}
+          LinkTo={`/restaurants/${restaurant.id}/details/menu`}
           is_open={restaurant.is_open}
           />
         ))}

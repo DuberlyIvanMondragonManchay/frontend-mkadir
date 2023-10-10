@@ -71,7 +71,7 @@ export default function RegisterAsRestaurant() {
           setRestaurantRegister({...values,logo_url:imageUrl})
           // setRestaurantRegister({...values})
           window.localStorage.setItem('restaurantRegister',JSON.stringify(values));
-          navigateTo('/register/personal-data')
+          navigateTo('/auth/register/personal-data')
         }}
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (

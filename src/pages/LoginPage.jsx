@@ -1,11 +1,11 @@
 import { Formik } from 'formik'
 import { Alert } from "@mui/material";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ButtonPrimary,InputForm } from '../components/specific/ComponentsForm'
 import { useAuth } from '../context/AuthContext';
 export default function LoginPage() {
-  const navigateTo = useNavigate()
   const {loginUserAuth,errors} = useAuth()
+
   return (
     <div className="m-2">
       {errors.length <= 0 ? "" : <Alert className="mt-3" severity="error">{errors}</Alert>}
@@ -20,20 +20,13 @@ export default function LoginPage() {
       }}
       onSubmit={async (values) => {
         const res= await loginUserAuth(values)
-        if(res){
-          navigateTo('/profile')     
+        if(res.data){
+          window.location.reload();  
         }
       }}
     >
       {({ values, handleChange, handleSubmit, isSubmitting }) => (
         <form onSubmit={handleSubmit}>
-          {/* {Object.keys(errors).map((key, index) => (
-            errors[key].map((error, errorIndex) => (
-              <div key={errorIndex}>
-                <Alert className="mt-3" severity="error">{key}: {error}</Alert>
-              </div>
-            ))
-          ))} */}
           <div className="my-3">
             <label htmlFor="email">
               <b>Correo electrónico</b>
@@ -61,7 +54,7 @@ export default function LoginPage() {
               required={true}
             />
           </div>
-          <p className='text-center'><Link to={"/register/options"} className='color-text-primary underline font-semibold'>¡Regístrate</Link> en <b>Mkadir</b>!</p>
+          <p className='text-center'><Link to={"/auth/register/options"} className='color-text-primary underline font-semibold'>¡Regístrate</Link> en <b>Mkadir</b>!</p>
           <ButtonPrimary
             disabled={isSubmitting}
             text={isSubmitting ? "Accediendo..." : "Acceder"}

@@ -8,6 +8,7 @@ export function AuthProvider({ children }) {
     // const cookies = new Cookies()
     const [user, setUser] = useState(null);
     const [errors,setErrors] = useState([])
+    const [isLoading,setIsLoading] = useState(true)
 
 
     const registerUserAuth = async ()=> {
@@ -16,19 +17,21 @@ export function AuthProvider({ children }) {
         const restaurantData = await JSON.parse(window.localStorage.getItem('restaurantRegister'))
         if(userData){
           const res_user = await registerRequest(userData)
+          console.log(userData)
           if(restaurantData){
-            const res_restaurant = await createResturantsRequest({...restaurantData,user:res_user.data.id})
-            // delete data from local Storage
-            window.localStorage.removeItem('restaurantRegister')
-            window.localStorage.removeItem('image_name')
-            window.localStorage.removeItem('userRegister')
-            return res_restaurant.data
+            try {
+              const res_restaurant = await createResturantsRequest({...restaurantData,user:res_user.data.id})
+              console.log(restaurantData)
+              return res_restaurant
+            } catch (error) {
+              console.log(error)
+              setErrors(error.response.data)
+            }
           }
-          // delete data from local Storage
-          window.localStorage.removeItem('userRegister')
-          return res_user.data
+          return res_user
         }
       } catch (error) {
+        console.log(error)
         setErrors(error.response.data)
       }
     } 
@@ -36,7 +39,7 @@ export function AuthProvider({ children }) {
     const loginUserAuth = async (user) => {
       try {
         const res = await loginRequest(user)
-        return res.data
+        return res
       } catch (error) {
         setErrors(error.response.data)
         console.log(error.response.data)
@@ -59,11 +62,12 @@ export function AuthProvider({ children }) {
   useEffect(()=> {
     if(user==null){
       verifyUser()
+      setIsLoading(false)
     }
   },[user])
 
   return (
-    <AuthContext.Provider value={{registerUserAuth,errors,loginUserAuth,user}}>
+    <AuthContext.Provider value={{isLoading,registerUserAuth,errors,loginUserAuth,user}}>
       {children}
     </AuthContext.Provider>
   );

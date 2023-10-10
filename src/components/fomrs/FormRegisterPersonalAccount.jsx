@@ -21,13 +21,19 @@ export default function FormRegisterPersonalAccount() {
         confirm_password: "",
       }}
       onSubmit={async (values) => {
+        values.username=values.email
         setUserRegister({...userRegister,...values});
   
         const userdata = JSON.parse(window.localStorage.getItem('userRegister'))
         window.localStorage.setItem('userRegister',JSON.stringify({...userdata,...values,username:values.email}));        
-        const res = registerUserAuth()//register to database
-        if(res){
-          navigateTo('/profile')     
+        const res = await registerUserAuth()//register to database
+        console.log(res)
+        if(res.data){
+          // delete data from local Storage
+          window.localStorage.removeItem('restaurantRegister')
+          window.localStorage.removeItem('image_name')
+          window.localStorage.removeItem('userRegister')
+          window.location.reload();   
         }
       }}
     >
