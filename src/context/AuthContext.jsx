@@ -1,12 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getUserRequest, loginRequest, registerRequest } from "../api/auth.api";
-import { createResturantsRequest } from "../api/Restaurant.pi";
+import { createResturantsRequest, getResturantRequest } from "../api/Restaurant.pi";
 // import Cookies from 'universal-cookie';
 
 const AuthContext = createContext();
 export function AuthProvider({ children }) {
     // const cookies = new Cookies()
     const [user, setUser] = useState(null);
+    const [restaurantData, setRestaurantData] = useState(null);
     const [errors,setErrors] = useState([])
     const [isLoading,setIsLoading] = useState(true)
 
@@ -35,7 +36,6 @@ export function AuthProvider({ children }) {
         setErrors(error.response.data)
       }
     } 
-
     const loginUserAuth = async (user) => {
       try {
         const res = await loginRequest(user)
@@ -44,6 +44,13 @@ export function AuthProvider({ children }) {
         setErrors(error.response.data)
         console.log(error.response.data)
       }
+    }
+
+    const getRestaurant = async(id_restaurant) => {
+      const res = await getResturantRequest(id_restaurant);
+      setRestaurantData(res.data);
+      setIsLoading(false)
+      return res
     }
   // Eliminar errores despues de 5 segundos
   useEffect(() => {
@@ -67,7 +74,7 @@ export function AuthProvider({ children }) {
   },[user])
 
   return (
-    <AuthContext.Provider value={{isLoading,registerUserAuth,errors,loginUserAuth,user}}>
+    <AuthContext.Provider value={{isLoading,registerUserAuth,errors,loginUserAuth,user,getRestaurant,restaurantData}}>
       {children}
     </AuthContext.Provider>
   );

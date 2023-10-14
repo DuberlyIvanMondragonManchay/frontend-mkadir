@@ -2,12 +2,13 @@ import React,{useEffect, useState} from 'react'
 import CarrouselComponent from '../components/CarrouselComponent'
 import SearchComponent from '../components/SearchComponent'
 import CardRestaurant from '../components/cards/CardRestaurant'
-import { getResturantsRequest } from '../api/Restaurant.pi'
+import { getAllResturantsRequest } from '../api/Restaurant.pi'
+
 export default function HomePage() {
   const [restaurants,setRestaurants] = useState([])
   const [search,setSearch] = useState('')
   const showData = async()=>{
-    const res = await getResturantsRequest()
+    const res = await getAllResturantsRequest()
     setRestaurants(res.data)
   }
   const searcher = (e) => {
