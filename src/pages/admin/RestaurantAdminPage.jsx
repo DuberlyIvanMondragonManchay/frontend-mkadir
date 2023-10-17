@@ -63,14 +63,22 @@ export default function RestaurantAdminPage() {
                 </div>
             )}
             <SearchComponent value={search} onChange={searcher} />
-            <div className="max-w-full overflow-x-auto">
-                <table className="min-w-full mt-4 bg-white border border-gray-300">
-                    {/* Resto de tu código */}
+            <div className="overflow-x-auto">
+                <table style={{ minWidth:"900px" }} className="min-w-full mt-4 bg-white border border-gray-300">
+                <thead>
+                    <tr>
+                        <th className="px-4 py-2 border bg-gray-200 text-gray-600"></th>
+                        <th className="px-4 py-2 border bg-gray-200 text-gray-600">#</th>
+                        <th className="px-4 py-2 border bg-gray-200 text-gray-600">Logo</th>
+                        <th className="px-4 py-2 border bg-gray-200 text-gray-600">Nombre</th>
+                        <th className="px-4 py-2 border bg-gray-200 text-gray-600">Estado</th>
+                        <th className="px-4 py-2 border bg-gray-200 text-gray-600">Ubicación</th>
+                    </tr>
+                </thead>
                     <tbody>
                         {results.map((restaurant, index) => (
                             <tr key={index} className="hover:bg-gray-50 text-center">
-                                <td className="border px-4 py-2">{index + 1}</td>
-                                <td className="border px-4 py-2">
+                                <td className="border">
                                     <input
                                         type="checkbox"
                                         className="form-checkbox h-5 w-5 text-indigo-600"
@@ -78,8 +86,9 @@ export default function RestaurantAdminPage() {
                                         checked={selectedRows.includes(index)}
                                     />
                                 </td>
+                                <td className="border px-4 py-2">{index + 1}</td>
                                 <td className="border px-4 py-2">
-                                    <img className="w-10 h-10 rounded-full" src={restaurant.logo_url} alt="" />
+                                    <img style={{ width:"50px",height:"50px" }} className="w-10 h-10 rounded-full m-auto" src={restaurant.logo_url} alt="" />
                                 </td>
                                 <td className="border px-4 py-2">{restaurant.name}</td>
                                 <td className="border px-4 py-2">{restaurant.is_open ? "Abierto" : "Cerrado"}</td>
