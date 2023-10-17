@@ -64,7 +64,7 @@ export default function RestaurantAdminPage() {
             )}
             <SearchComponent value={search} onChange={searcher} />
             <div className="overflow-x-auto">
-                <table style={{ minWidth:"900px" }} className="min-w-full mt-4 bg-white border border-gray-300">
+                <table style={{ minWidth:"900px" }} className="w-full mt-4 bg-white border border-gray-300">
                 <thead>
                     <tr>
                         <th className="px-4 py-2 border bg-gray-200 text-gray-600"></th>
