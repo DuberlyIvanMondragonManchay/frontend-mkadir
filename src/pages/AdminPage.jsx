@@ -18,6 +18,7 @@ export default function AdminPage() {
         <CardAdmin 
         car_img={activeRestaurant}
         card_title = "Mis restaurantes"
+        to_url="restaurants"
         />
         <CardAdmin 
         car_img={food}
@@ -31,7 +32,6 @@ export default function AdminPage() {
         car_img={employees}
         card_title = "Empleados"
         />
-
       </div>
     </div>
   );
