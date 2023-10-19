@@ -9,7 +9,7 @@ export const ButtonPrimary=(props) =>{
     className={`mt-6 ${props.disabled ?"bg-green-200 color-text" : "bg-color-primary text-white"} w-full py-3  rounded-xl md:rounded-xl`}
     disabled = {props.disabled ? props.disabled : false}
     >
-    {props.text}
+    {props.text?props.text:"Title"}
   </button>
   )
 }

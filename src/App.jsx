@@ -11,7 +11,7 @@ import Routes from './routes/Routes'
       <AuthProvider>
         <RegisterProvider>
             <Routes/>
-          <div className='py-5'></div>
+          <div className='py-5 my-9'></div>
           <Navigation/>
         </RegisterProvider>
       </AuthProvider>

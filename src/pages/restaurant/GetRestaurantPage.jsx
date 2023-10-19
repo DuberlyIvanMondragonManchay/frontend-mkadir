@@ -23,7 +23,6 @@ export default function GetRestaurantPage() {
   }, []);
 
   if (isLoading) return <h1>Loading</h1>;
-  console.log(restaurantData)
   return (
     <div className="w-full mx-auto h-full shadow-lg rounded-lg overflow-hidden">
         <h1 className='text-2xl my-5 text-center'>Perfil del restaurante</h1>

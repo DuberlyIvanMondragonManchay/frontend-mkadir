@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getUserRequest, loginRequest, registerRequest } from "../api/auth.api";
+import { getUserRequest, loginRequest, registerRequest, verifyPasswordRequest } from "../api/auth.api";
 import { createResturantsRequest, getResturantRequest } from "../api/Restaurant.pi";
 // import Cookies from 'universal-cookie';
 
@@ -66,6 +66,14 @@ export function AuthProvider({ children }) {
     const res = await getUserRequest()
     setUser(res.data)
   }
+  const verifyPassword = async (password) => {
+    try {
+      const res = await verifyPasswordRequest({"password":password})
+      return res
+    } catch (error) {
+      setErrors(error.response.data)
+    }
+  }
   useEffect(()=> {
     if(user==null){
       verifyUser()
@@ -74,7 +82,7 @@ export function AuthProvider({ children }) {
   },[user])
 
   return (
-    <AuthContext.Provider value={{isLoading,registerUserAuth,errors,loginUserAuth,user,getRestaurant,restaurantData}}>
+    <AuthContext.Provider value={{isLoading,registerUserAuth,errors,loginUserAuth,user,getRestaurant,restaurantData,verifyPassword}}>
       {children}
     </AuthContext.Provider>
   );
