@@ -29,6 +29,7 @@ export default function RestaurantAdminPage() {
         <div className="overflow-x-auto mx-1">
             <h1 className="text-2xl my-5 text-center">Administrar mis Restaurantes</h1>
             {isLoading? <div className='mt-10'><SpinerComponent/></div>: 
+            results?
             results.length > 0 ? 
             <div className="max-w-full text-end overflow-hidden">
                 <SearchComponent value={search} onChange={searcher} />
@@ -65,7 +66,7 @@ export default function RestaurantAdminPage() {
             </div>
             :<div className='text-center'>
                 <RestaurantDoc linkButton="/admin/restaurants/create" title="Registra un restaurante"/>
-            </div>}
+            </div>:null}
         </div>
     );
 }

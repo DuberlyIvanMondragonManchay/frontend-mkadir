@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react'
 import { useParams ,useNavigate} from 'react-router-dom'
 import {useRestaurantContext} from '../../context/RestaurantContext'
 import { InputForm } from '../specific/ComponentsForm'
-import { Formik } from 'formik'
+import { FastField, Formik } from 'formik'
 import { Alert } from '@mui/material'
 import CardAdmin from '../cards/CardAdmin'
 import WarningModal from '../modals/WarningModal'
@@ -26,19 +26,26 @@ export default function FormRestaurant() {
     const [imageError,setImageError] = useState(null)
     
     useEffect(() => {
+      if (restaurant_id && !restaurant) {
         const loadRestaurant = async () => {
-          if (restaurant_id) {
+          try {
+            setIsLoading(true);
             const restaurantData = await getRestaurant(restaurant_id);
-            if(restaurantData.data){
+            if (restaurantData.data) {
               setRestaurant(restaurantData.data);
             }
-          setIsLoading(false)
+            setIsLoading(false);
+          } catch (error) {
+            console.error("Error al cargar el restaurante:", error);
+            setIsLoading(false);
           }
         };
-        if(!restaurant){
-          loadRestaurant();
-        }
-      }, [restaurant]);
+        loadRestaurant();
+      } else {
+        setIsLoading(false);
+      }
+    }, [restaurant_id, restaurant, getRestaurant]);
+    
 
       const handleChangeImage = async (e) => {
         setLoading(true)
@@ -66,19 +73,31 @@ export default function FormRestaurant() {
       
     }
   }
-  if (isLoading || !restaurant) return <SpinerComponent/>
+  if (isLoading && !restaurant) return <SpinerComponent/>
+  console.log(restaurant)
     return (
       <div className = "m-2">
       <h2 className = "text-xl font-bold color-text-primary flex justify-center gap-1"><RiAdminFill />Administrar restaurante/ <span className='text-black'>{restaurant_id?"Editar":"Crear"}</span></h2>
       {imageError === null ? "" : <Alert className="mt-3" severity="error">{imageError}</Alert>}
 
       <Formik
-        initialValues={{
-          name: restaurant.name,
-          address: restaurant.address,
-          ruc: restaurant.ruc || "",
-          is_open: restaurant.is_open || false,
-          logo_url: imageUrl || restaurant.logo_url
+        initialValues={
+          restaurant?
+          {
+            name: restaurant.name || "",
+            address: restaurant.address || "",
+            ruc: restaurant.ruc || "",
+            is_open: restaurant.is_open || false,
+            logo_url: imageUrl || restaurant.logo_url 
+          }
+          :
+          {
+          name: restaurant? restaurant.name: "",
+          address: restaurant? restaurant.address:"",
+          ruc: restaurant? restaurant.ruc : "",
+          is_open: restaurant? restaurant.is_open: false,
+          logo_url: restaurant? restaurant.logo_url : "" 
+
         }}
         onSubmit={async (values) => {
           console.log(values) 
@@ -89,7 +108,7 @@ export default function FormRestaurant() {
             <div className="my-3 flex justify-center">
               
               <label htmlFor="logo_url" style={{ width: "100px", height:"100px" }} className="border flex  rounded-full overflow-hidden bg-gray-400 cursor-pointer">
-                <img className="m-auto" src={loading ? loading_picture : imageUrl ? imageUrl:restaurant.logo_url} alt="imagen-logo" />
+                <img className="m-auto" src={loading ? restaurant? loading_picture : imageUrl ? imageUrl:restaurant.logo_url:null} alt="imagen-logo" />
               </label>
             </div>
   
@@ -153,6 +172,7 @@ export default function FormRestaurant() {
                 <input
                   onChange={handleChange}
                   value={values.is_open}
+                  checked={values.is_open ? values.is_open : false}
                   id="is_open" type="checkbox" className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
                 <label htmlFor="is_open" className="cursor-pointer ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Abierto</label>
               </div>
@@ -183,11 +203,11 @@ export default function FormRestaurant() {
               <WarningModal
               titleButtonModal="Eliminar Restaurante"
               navigateToModal={'/admin/restaurants'}
-              textHeaderComponent={<p className='py-3 pl-3 font-semibold'><span className='text-red-500'>Eliminar/</span>{restaurant.name}</p>}
+              textHeaderComponent={<p className='py-3 pl-3 font-semibold'><span className='text-red-500'>Eliminar/</span>{restaurant? restaurant.name : null}</p>}
               textModalComponent={
                 <div>
                 {errors.length <= 0 ? "" : <Alert className='mb-5' severity="error">{errors}</Alert>}
-                <p className='mb-2'>Si eliminas el restaurante <span className='font-semibold'>{restaurant.name}</span>, se eliminarán los empleados, los menús y los platos que tengan relación con este restaurante.</p>
+                <p className='mb-2'>Si eliminas el restaurante <span className='font-semibold'>{restaurant? restaurant.name : null}</span>, se eliminarán los empleados, los menús y los platos que tengan relación con este restaurante.</p>
                 <p className='font-semibold'>Para continuar escribe la contraseña de la cuenta</p>
                 <Formik initialValues={{ password:"" }}
                     onSubmit={async (values) => {
