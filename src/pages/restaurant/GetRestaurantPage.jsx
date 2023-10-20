@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {useAuth} from '../../context/AuthContext'
 export default function GetRestaurantPage() {
-  const { id_restaurant } = useParams();
+  const { restaurant_id } = useParams();
   const { user,getRestaurant,restaurantData} = useAuth()
   const [isLoading, setIsLoading] = useState(true);
 
   const getRestaurantData = async () => {
     try {
-      const res = await getRestaurant(id_restaurant);
+      const res = await getRestaurant(restaurant_id);
       if(res.data){
           setIsLoading(false);
       }

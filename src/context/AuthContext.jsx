@@ -46,8 +46,8 @@ export function AuthProvider({ children }) {
       }
     }
 
-    const getRestaurant = async(id_restaurant) => {
-      const res = await getResturantRequest(id_restaurant);
+    const getRestaurant = async(restaurant_id) => {
+      const res = await getResturantRequest(restaurant_id);
       setRestaurantData(res.data);
       setIsLoading(false)
       return res

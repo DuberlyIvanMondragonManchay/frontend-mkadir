@@ -10,7 +10,7 @@ export default function Menu() {
   const [search,setSearch] = useState('')
   const [error,setError] = useState(false)
 
-  const { id_restaurant } = useParams();
+  const { restaurant_id } = useParams();
 
   const groupPlatesFunction = (plates) => {
     const updatedGroupPlates = new Set(groupPlates);
@@ -37,7 +37,7 @@ export default function Menu() {
 
   const showData = async () => {
     try {
-      const res = await getMenuIsPublishedRequest(id_restaurant);
+      const res = await getMenuIsPublishedRequest(restaurant_id);
       groupPlatesFunction(res.data.plates);
       setMenu(res.data);
     } catch (error) {

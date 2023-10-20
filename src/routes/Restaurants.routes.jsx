@@ -29,12 +29,12 @@ const restaurant_details_routes = [
 ]
 
 const RestaurantsRoutes = [
-  { path: ":id_restaurant/employees/*", element: <AuthRequired/>, children: employees_routes },
-  { path: ":id_restaurant/work-schedule/*", element: <AuthRequired/>, children: work_schedule_routes },
+  { path: ":restaurant_id/employees/*", element: <AuthRequired/>, children: employees_routes },
+  { path: ":restaurant_id/work-schedule/*", element: <AuthRequired/>, children: work_schedule_routes },
   { path: "menu/*", element: <Outlet/>, children: menu_routes },
-  { path: ":id_restaurant/details/*", element: <RestaurantDetailsPage/>, children: restaurant_details_routes },
+  { path: ":restaurant_id/details/*", element: <RestaurantDetailsPage/>, children: restaurant_details_routes },
   { path: "", element: <AuthRequired children={<GetRestaurantsPage/>}/>},
-  { path: ":id_restaurant", element: <AuthRequired children={<GetRestaurantPage/>}/>},
+  { path: ":restaurant_id", element: <AuthRequired children={<GetRestaurantPage/>}/>},
 ];
 
 export default RestaurantsRoutes

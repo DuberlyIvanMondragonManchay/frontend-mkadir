@@ -1,34 +1,34 @@
 import React,{useEffect,useState} from 'react'
 import { useParams,useNavigate, Link } from 'react-router-dom'
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 import { Formik } from 'formik';
-import { ButtonPrimary, InputForm } from '../../components/specific/ComponentsForm';
+import { InputForm } from '../../../components/specific/ComponentsForm';
 import { RiAdminFill } from 'react-icons/ri'
-import WarningModal from '../../components/modals/WarningModal';
+import WarningModal from '../../../components/modals/WarningModal';
 import { Alert } from "@mui/material";
-import { deleteResturantRequest } from '../../api/Restaurant.pi';
-import CardAdmin from '../../components/cards/CardAdmin';
-
+import CardAdmin from '../../../components/cards/CardAdmin';
+import SpinerComponent from '../../../components/SpinerComponent'
 // images
-import menu from '../../imgs/icons/menu.svg'
-import employees from '../../imgs/icons/employees.svg'
-import food from '../../imgs/icons/food.svg'
-import schedule from '../../imgs/icons/schedule.svg'
+import menu from '../../../imgs/icons/menu.svg'
+import employees from '../../../imgs/icons/employees.svg'
+import food from '../../../imgs/icons/food.svg'
+import schedule from '../../../imgs/icons/schedule.svg'
+import { useRestaurantContext } from '../../../context/RestaurantContext';
 
 export default function GetRestaurantAdminPage() {
   const navigateTo = useNavigate()
-  const { id_restaurant } = useParams();
+  const { restaurant_id } = useParams();
   const [imageUrl,setImageUrl] = useState(null)
   const [loading,setLoading] = useState(false)//Loading
-  const { getRestaurant,restaurantData,verifyPassword,errors} = useAuth()
-  const [isLoading, setIsLoading] = useState(true);
-  const [clicksCount,setClicksCount] = useState(0)
+  const [ restaurantData,setRestaurantData] = useState(null)
   const [imageError,setImageError] = useState(null)
-  const img_resturant_default = "https://firebasestorage.googleapis.com/v0/b/dimm-d6925.appspot.com/o/mkadir%2Flogo_default_restaurant.svg?alt=media&token=841af14a-f5e7-49e7-a4e8-6a3693c564f8&_gl=1*vhpsco*_ga*MTMyODQ5MjUzOC4xNjkzMDA0NjQ1*_ga_CW55HF8NVT*MTY5NjAwNDYzMy4xNS4xLjE2OTYwMDQ3MTQuNTYuMC4w"
+  const { verifyPassword,errors } = useAuth()
+  const {isLoading, setIsLoading,getRestaurant,deleteRestaurant} = useRestaurantContext()
   const getRestaurantData = async () => {
     try {
-      const res = await getRestaurant(id_restaurant);
+      const res = await getRestaurant(restaurant_id);
       if(res.data){
+        setRestaurantData(res.data);
           setIsLoading(false);
           console.log(restaurantData)
       }
@@ -41,27 +41,25 @@ export default function GetRestaurantAdminPage() {
   useEffect(() => {
     getRestaurantData();
   }, []);
+
   const handleChangeImage = async (e) => {
     setLoading(true)
     const img = e.target.files[0];
     console.log(img)
   };
-  if (isLoading) return <h1>Loading</h1>;
+  if (isLoading || !restaurantData) return <SpinerComponent/>
   
   // Delete logo
   const deleteLogo = () => {
     console.log("deleteLogo")
   }
-  // Delete Restaurant
-  const deleteRestaurat = () => {
-    console.log("Delte restaurant")
-  }
-  // Verify Password
+
+  // Verify Password and delete restaurant
   const handleVerifyPassword = async (password,restaurant_id) => {
     const res = await verifyPassword(password)
     if(res){
       try {
-        const res_delete_restaurant = await deleteResturantRequest(restaurant_id)
+        const res_delete_restaurant = await deleteRestaurant(restaurant_id)
         if(res_delete_restaurant.data){
           return navigateTo('/admin/restaurants')
         }
@@ -182,7 +180,6 @@ export default function GetRestaurantAdminPage() {
     <div className='flex justify-center mt-5'>
             <WarningModal 
             titleButtonModal="Eliminar Restaurante"
-            handleFunctionModal={deleteRestaurat} 
             navigateToModal={'/admin/restaurants'}
             textHeaderComponent={<p className='py-3 pl-3 font-semibold'><span className='text-red-500'>Eliminar/</span> {restaurantData.name}</p>}
             textModalComponent={

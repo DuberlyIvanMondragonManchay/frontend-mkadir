@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate  } from "react-router-dom";
 import { Formik } from "formik";
-import {ButtonPrimary,InputForm} from '../../components/specific/ComponentsForm'
+import {ButtonPrimary,InputForm} from '../specific/ComponentsForm'
 import { useRegister } from '../../context/RegisterContext';
 export default function FormRegisterPersonalData() {
   const {setUserRegister,userRegister} = useRegister()
