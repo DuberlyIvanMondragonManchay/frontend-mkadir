@@ -108,7 +108,7 @@ export default function FormRestaurant() {
             <div className="my-3 flex justify-center">
               
               <label htmlFor="logo_url" style={{ width: "100px", height:"100px" }} className="border flex  rounded-full overflow-hidden bg-gray-400 cursor-pointer">
-                <img className="m-auto" src={loading ? restaurant? loading_picture : imageUrl ? imageUrl:restaurant.logo_url:null} alt="imagen-logo" />
+                <img className="m-auto" src={!isLoading? restaurant?restaurant.logo_url:null:null} alt="imagen-logo" />
               </label>
             </div>
   
