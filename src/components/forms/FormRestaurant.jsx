@@ -2,7 +2,6 @@ import React, { useState,useEffect } from 'react'
 import { useParams ,useNavigate} from 'react-router-dom'
 import {useRestaurantContext} from '../../context/RestaurantContext'
 import { InputForm } from '../specific/ComponentsForm'
-import { FastField, Formik } from 'formik'
 import { Alert } from '@mui/material'
 import CardAdmin from '../cards/CardAdmin'
 import WarningModal from '../modals/WarningModal'
@@ -13,18 +12,24 @@ import employees from '../../imgs/icons/employees.svg'
 import food from '../../imgs/icons/food.svg'
 import schedule from '../../imgs/icons/schedule.svg'
 import { useAuth } from '../../context/AuthContext'
+import img_default_profile_resturant from '../../imgs/img_default_profile_resturant.svg'
+import img_loading_profile from '../../imgs/gifs/img_loading_profile.gif'
 // Spiner
 import SpinerComponent from '../../components/SpinerComponent'
+// Image logo Controller 
+import {uploadFileImage} from '../functions/ControllerImage'
+import { Formik } from 'formik'
 export default function FormRestaurant() {
-    const [loading,setLoading] = useState(false)//Loading
-    const {getRestaurant,isLoading,setIsLoading,error,deleteRestaurant} = useRestaurantContext()
+    const [loadingImage,setLoadingImage] = useState(false)//Loading
+    const {getRestaurant,isLoading,setIsLoading,error,deleteRestaurant,createRestaurant} = useRestaurantContext()
     const { verifyPassword,errors } = useAuth()
     const navigateTo = useNavigate()
     const {restaurant_id} = useParams()
     const [restaurant,setRestaurant] = useState(null)
     const [imageUrl,setImageUrl] = useState(null)
     const [imageError,setImageError] = useState(null)
-    
+    const [clicksCount, setClicksCount] = useState(0);
+
     useEffect(() => {
       if (restaurant_id && !restaurant) {
         const loadRestaurant = async () => {
@@ -32,6 +37,7 @@ export default function FormRestaurant() {
             setIsLoading(true);
             const restaurantData = await getRestaurant(restaurant_id);
             if (restaurantData.data) {
+              setImageUrl(restaurantData.data.logo_url)
               setRestaurant(restaurantData.data);
             }
             setIsLoading(false);
@@ -47,11 +53,16 @@ export default function FormRestaurant() {
     }, [restaurant_id, restaurant, getRestaurant]);
     
 
-      const handleChangeImage = async (e) => {
-        setLoading(true)
-        const img = e.target.files[0];
-        console.log(img)
-      };
+    const handleChangeImage = async (e) => {
+      setLoadingImage(true)
+      const img = e.target.files[0];
+      if(img){
+        const res =await uploadFileImage(img, clicksCount, setClicksCount);
+        setLoadingImage(false)
+        setImageUrl(res)
+      }
+      window.localStorage.removeItem('image_name')
+    };
         // Delete logo
   const deleteLogo = () => {
     console.log("deleteLogo")
@@ -81,6 +92,7 @@ export default function FormRestaurant() {
       {imageError === null ? "" : <Alert className="mt-3" severity="error">{imageError}</Alert>}
 
       <Formik
+        enableReinitialize ={true}
         initialValues={
           restaurant?
           {
@@ -96,21 +108,31 @@ export default function FormRestaurant() {
           address: restaurant? restaurant.address:"",
           ruc: restaurant? restaurant.ruc : "",
           is_open: restaurant? restaurant.is_open: false,
-          logo_url: restaurant? restaurant.logo_url : "" 
+          logo_url: restaurant? restaurant.logo_url :"" 
 
         }}
         onSubmit={async (values) => {
-          console.log(values) 
+          values.logo_url=imageUrl?imageUrl:""
+          if (restaurant_id) {
+            console.log("Updated..")
+          } else {
+            console.log("Created")
+            console.log(values)
+            const data =await createRestaurant(values)
+            if(data){
+              navigateTo("/admin/restaurants")
+            }
+          }
         }}
       >
-        {({ values, handleChange, handleSubmit, isSubmitting }) => (
+        {({ values, handleChange, handleSubmit, isSubmitting}) => (
           <form onSubmit={handleSubmit}>
-            <div className="my-3 flex justify-center">
-              
-              <label htmlFor="logo_url" style={{ width: "100px", height:"100px" }} className="border flex  rounded-full overflow-hidden bg-gray-400 cursor-pointer">
-                <img className="m-auto" src={!isLoading? restaurant?restaurant.logo_url:null:null} alt="imagen-logo" />
-              </label>
-            </div>
+          <div className="my-3 flex justify-center">
+            <label htmlFor="logo_url" style={{ width: "100px", height: "100px" }} className={`border flex rounded-full overflow-hidden ${imageUrl?loadingImage?"bg-white":null:"bg-teal-600"} cursor-pointer`}>
+              <img style={{ objectFit: "cover", width: "100%", height: "100%" }} src={loadingImage ? img_loading_profile : imageUrl ? imageUrl : img_default_profile_resturant} alt="imagen-logo" />
+            </label>
+          </div>
+
   
             <div className="my-3 ">
               <div className='color-text-primary font-medium flex justify-center gap-2'>
@@ -182,12 +204,23 @@ export default function FormRestaurant() {
               {restaurant_id?
               <button type='button' className='border-2  bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded'>Cancelar</button>
             :null}
-              <button type='submit' className='bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded text-white' >{restaurant_id?"Actualizar":"Crear Restaurante"}</button>
+              <button disabled={loadingImage||isSubmitting} type='submit' className={`${ loadingImage?"bg-teal-400 cursor-not-allowed":"bg-teal-500 hover:bg-teal-600 "} px-3 py-2 rounded text-white`}>
+                
+                {restaurant_id? isSubmitting?
+                  <p className='flex items-center'><SpinerComponent sizeSpiner="w-5 h-5" colorSpiner="fill-teal-500"/>Actualizando...</p>
+                :"Actualizar":
+                
+                isSubmitting?
+                <p className='flex items-center'><SpinerComponent sizeSpiner="w-5 h-5" colorSpiner="fill-teal-500"/>Creando...</p>
+                :"Crear Restaurante"}          
+        
+              </button>
             </div>
           </form>
         )}
       </Formik>
       {/* Options */}
+      {restaurant_id?
       <div className='flex gap-2  justify-center mt-3'>
           <div className="grid grid-cols-2 gap-4">
             <CardAdmin car_img={employees} card_title = "Mis empleados"/>
@@ -197,6 +230,7 @@ export default function FormRestaurant() {
             
           </div>
       </div>
+        :null}
       {/* Modal delete */}
       {restaurant_id?
       <div className='flex justify-center mt-5'>

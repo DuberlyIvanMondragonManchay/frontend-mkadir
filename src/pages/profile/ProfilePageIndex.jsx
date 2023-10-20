@@ -9,7 +9,7 @@ export default function ProfilePageIndex() {
       <div className="bg-gray-300 h-40"></div> {/* Portada gris */}
       {!user.picture? 
       <div className='flex justify-center items-center'>
-        <div style={{ width:"100px",height:"100px"  }} className='border-4 rounded-full flex justify-center items-center bg-color-primary className="w-32 h-32 sm:w-32 sm:h-32 border-white -mt-12 sm:-mt-16 mx-auto"'>
+        <div style={{ width:"100px",height:"100px"  }} className='border-4 rounded-full flex justify-center items-center bg-color-primary w-32 h-32 sm:w-32 sm:h-32 border-white -mt-12 sm:-mt-16 mx-auto"'>
           <p className='text-5xl text-center text-white'>{user.name.charAt()+user.paternal_surname.charAt()}</p>
         </div>      
       </div>

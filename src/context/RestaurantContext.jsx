@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getResturantsRequest,getResturantRequest,deleteResturantRequest } from "../api/Restaurant.pi";
+import { getResturantsRequest,getResturantRequest,deleteResturantRequest, createResturantRequest } from "../api/Restaurant.pi";
 
 const RestaurantContext = createContext();
 export function RestaurantProvider({ children }) {
@@ -42,8 +42,18 @@ export function RestaurantProvider({ children }) {
     setIsLoading(false)
     return res
   }
+
+  const createRestaurant = async (restaurant) => {
+    try {
+      const res = await createResturantRequest(restaurant)
+      return res.data
+    } catch (error) {
+      console.log(error)
+      setErrors(error.response.data)
+    }
+  }
     return (
-        <RestaurantContext.Provider value={{isLoading,errors,getRestaurant,deleteRestaurant,getRestaurants,restaurants,setIsLoading}}>
+        <RestaurantContext.Provider value={{isLoading,errors,getRestaurant,deleteRestaurant,getRestaurants,restaurants,setIsLoading,createRestaurant}}>
       {children}
     </RestaurantContext.Provider>
   );

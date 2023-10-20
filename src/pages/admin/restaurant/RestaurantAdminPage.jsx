@@ -52,7 +52,15 @@ export default function RestaurantAdminPage() {
                                 <tr onClick={()=>handleGetRestaurant(restaurant.id)} key={index} className="hover:bg-gray-200 text-center cursor-pointer">
                                     <td className="border px-4 py-2">{index + 1}</td>
                                     <td className="border px-4 py-2">
-                                        <img className="w-10 h-10 rounded-full" src={restaurant.logo_url} alt="" />
+                                        <div className='flex justify-center items-center'>
+                                        {restaurant.logo_url !== null && restaurant.logo_url.trim() === ''?
+                                            <div style={{ width:"50px",height:"50px"  }} className='border-4 rounded-full flex justify-center items-center bg-color-primary'>
+                                                <p className='text-2xl text-white'>{restaurant.name.charAt()}</p>
+                                            </div>      
+                                            :
+                                            <img data-tooltip-target="tooltip-jese" class="w-10 h-10 object-cover rounded-full ring-gray-300 dark:ring-gray-500"  src={restaurant.logo_url} alt="Medium avatar"/>
+                                        }
+                                        </div>
                                     </td>
                                     <td className="border px-4 py-2">{restaurant.name}</td>
                                     <td className="border px-4 py-2">{restaurant.is_open ? "Abierto" : "Cerrado"}</td>
