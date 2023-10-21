@@ -3,7 +3,7 @@ import CarrouselComponent from '../components/CarrouselComponent'
 import SearchComponent from '../components/SearchComponent'
 import CardRestaurant from '../components/cards/CardRestaurant'
 import { getAllResturantsRequest } from '../api/Restaurant.pi'
-
+import img_default_profile_resturant from '../imgs/img_default_profile_resturant.svg'
 export default function HomePage() {
   const [restaurants,setRestaurants] = useState([])
   const [search,setSearch] = useState('')

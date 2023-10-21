@@ -3,9 +3,15 @@ import {Link} from 'react-router-dom'
 export default function CardRestaurant(props) {
   return (
       <Link to={props.LinkTo} className='flex items-center border py-2 my-2 hover:shadow-xl shadow-lg rounded-md transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-100 duration-200 cursor-pointer'>
-          <div className='border overflow-hidden rounded-full w-16 h-16 flex justify-center items-center'>
-              <img src={props.card_img} alt={`Imagen de ${props.title}`} className='w-100 h-100 object-cover' />
-          </div>
+        <div className='flex justify-center items-center'>
+        {props.card_img !== null && props.card_img.trim() === ''?
+            <div style={{ width:"50px",height:"50px"  }} className='ml-2 rounded-full flex justify-center items-center bg-color-primary'>
+                <p className='text-2xl text-white'>{props.card_title.charAt()}</p>
+            </div>      
+            :
+            <img style={{ width:"50px",height:"50px"  }} className="ml-3 w-10 h-10 object-cover rounded-full ring-gray-300 dark:ring-gray-500"  src={props.card_img} alt="Medium avatar"/>
+        }
+        </div>
           <div className='ml-4 w-full flex justify-between mr-3'>
               <div>
                 <p className='text-lg font-bold text-gray-600'>{props.card_title}</p>
