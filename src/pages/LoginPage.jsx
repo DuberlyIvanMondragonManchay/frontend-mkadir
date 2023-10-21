@@ -2,6 +2,7 @@ import { Formik } from 'formik'
 import { Alert } from "@mui/material";
 import { Link } from 'react-router-dom';
 import { ButtonPrimary,InputForm } from '../components/specific/ComponentsForm'
+import SpinerComponent from '../components/SpinerComponent'
 import { useAuth } from '../context/AuthContext';
 export default function LoginPage() {
   const {loginUserAuth,errors} = useAuth()
@@ -57,7 +58,7 @@ export default function LoginPage() {
           <p className='text-center'><Link to={"/auth/register/options"} className='color-text-primary underline font-semibold'>¡Regístrate</Link> en <b>Mkadir</b>!</p>
           <ButtonPrimary
             disabled={isSubmitting}
-            text={isSubmitting ? "Accediendo..." : "Acceder"}
+            text={isSubmitting ? <div><SpinerComponent sizeSpiner="w-5 h-5" colorSpiner="fill-teal-500"/> Accediendo...</div> : "Acceder"}
           />
         </form>
       )}

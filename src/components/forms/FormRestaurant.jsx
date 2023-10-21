@@ -19,9 +19,10 @@ import SpinerComponent from '../../components/SpinerComponent'
 // Image logo Controller 
 import {uploadFileImage} from '../functions/ControllerImage'
 import { Formik } from 'formik'
+import { deleteImage2 } from '../../firebase/config'
 export default function FormRestaurant() {
     const [loadingImage,setLoadingImage] = useState(false)//Loading
-    const {getRestaurant,isLoading,setIsLoading,error,deleteRestaurant,createRestaurant} = useRestaurantContext()
+    const {messages,setMessages,getRestaurant,isLoading,setIsLoading,error,deleteRestaurant,createRestaurant,updateRestaurant} = useRestaurantContext()
     const { verifyPassword,errors } = useAuth()
     const navigateTo = useNavigate()
     const {restaurant_id} = useParams()
@@ -50,7 +51,7 @@ export default function FormRestaurant() {
       } else {
         setIsLoading(false);
       }
-    }, [restaurant_id, restaurant, getRestaurant]);
+    }, [restaurant_id, restaurant, getRestaurant,imageUrl]);
     
 
     const handleChangeImage = async (e) => {
@@ -64,9 +65,15 @@ export default function FormRestaurant() {
       window.localStorage.removeItem('image_name')
     };
         // Delete logo
-  const deleteLogo = () => {
-    console.log("deleteLogo")
-  }
+    const deleteLogo = async() => {
+      if(restaurant && !isLoading){
+        updateRestaurant(restaurant.id,{logo_url:""})
+        await deleteImage2(restaurant.logo_url)
+        setMessages({text:"Imagen Eliminada correctamente",color:"success"})
+        restaurant.logo_url=""
+        setImageUrl(null)
+      }
+    }
 
   // Verify Password and delete restaurant
   const handleVerifyPassword = async (password,id) => {
@@ -85,11 +92,12 @@ export default function FormRestaurant() {
     }
   }
   if (isLoading && !restaurant) return <SpinerComponent/>
-  console.log(restaurant)
     return (
       <div className = "m-2">
       <h2 className = "text-xl font-bold color-text-primary flex justify-center gap-1"><RiAdminFill />Administrar restaurante/ <span className='text-black'>{restaurant_id?"Editar":"Crear"}</span></h2>
       {imageError === null ? "" : <Alert className="mt-3" severity="error">{imageError}</Alert>}
+      
+      {messages === null ? "" : <Alert className="mt-3" severity={messages.color}>{messages.text}</Alert>}
 
       <Formik
         enableReinitialize ={true}
@@ -115,6 +123,13 @@ export default function FormRestaurant() {
           values.logo_url=imageUrl?imageUrl:""
           if (restaurant_id) {
             console.log("Updated..")
+            console.log(values)
+            try {
+              updateRestaurant(restaurant_id,values)
+              setMessages({text:"Datos actualizados correctamente",color:"success"})
+            } catch (error) {
+              setMessages({text:"Error al actualizar datos",color:"error"})
+            }
           } else {
             console.log("Created")
             console.log(values)
@@ -128,18 +143,18 @@ export default function FormRestaurant() {
         {({ values, handleChange, handleSubmit, isSubmitting}) => (
           <form onSubmit={handleSubmit}>
           <div className="my-3 flex justify-center">
-            <label htmlFor="logo_url" style={{ width: "100px", height: "100px" }} className={`border flex rounded-full overflow-hidden ${imageUrl?loadingImage?"bg-white":null:"bg-teal-600"} cursor-pointer`}>
-              <img style={{ objectFit: "cover", width: "100%", height: "100%" }} src={loadingImage ? img_loading_profile : imageUrl ? imageUrl : img_default_profile_resturant} alt="imagen-logo" />
+            <label htmlFor="logo_url" style={{ width: "100px", height: "100px" }} className={`border flex rounded-full overflow-hidden  ${loadingImage?"bg-white":imageUrl?"bg-white":"bg-teal-600"} cursor-pointer`}>
+              <img style={{ objectFit: "cover", width: "100%", height: "100%" }} 
+              
+              src={loadingImage ? img_loading_profile : imageUrl ? imageUrl : img_default_profile_resturant} 
+              alt="imagen-logo" />
             </label>
           </div>
-
   
             <div className="my-3 ">
               <div className='color-text-primary font-medium flex justify-center gap-2'>
                 <label htmlFor="logo_url" className='cursor-default'>{restaurant_id?"Editar logo":"Seleccionar logo"}</label>
-                {restaurant_id?
-                <div onClick={deleteLogo} className='cursor-default'>Eliminar logo</div>
-              :null}
+                {imageUrl?<div onClick={deleteLogo} className='cursor-default'>Eliminar logo</div>:null}
               </div>
               <input 
               style={{ display: 'none' }}
@@ -202,7 +217,7 @@ export default function FormRestaurant() {
   
             <div className='flex gap-2  justify-center'>
               {restaurant_id?
-              <button type='button' className='border-2  bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded'>Cancelar</button>
+              <button onClick={()=>navigateTo('/admin/restaurants')} type='button' className='border-2  bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded'>Cancelar</button>
             :null}
               <button disabled={loadingImage||isSubmitting} type='submit' className={`${ loadingImage?"bg-teal-400 cursor-not-allowed":"bg-teal-500 hover:bg-teal-600 "} px-3 py-2 rounded text-white`}>
                 
@@ -210,9 +225,9 @@ export default function FormRestaurant() {
                   <p className='flex items-center'><SpinerComponent sizeSpiner="w-5 h-5" colorSpiner="fill-teal-500"/>Actualizando...</p>
                 :"Actualizar":
                 
-                isSubmitting?
+                isSubmitting?loadingImage?
                 <p className='flex items-center'><SpinerComponent sizeSpiner="w-5 h-5" colorSpiner="fill-teal-500"/>Creando...</p>
-                :"Crear Restaurante"}          
+                :null:"Crear Restaurante"}          
         
               </button>
             </div>

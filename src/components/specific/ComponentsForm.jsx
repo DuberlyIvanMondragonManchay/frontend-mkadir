@@ -6,7 +6,7 @@ export const ButtonPrimary=(props) =>{
   return (
     <button
     type= {props.type? props.type : "submit"}
-    className={`mt-6 ${props.disabled ?"bg-green-200 color-text" : "bg-color-primary text-white"} w-full py-3  rounded-xl md:rounded-xl`}
+    className={`mt-6 ${props.disabled ?"bg-teal-500 color-text cursor-not-allowed" : "bg-color-primary text-white"} w-full py-3  rounded-xl md:rounded-xl`}
     disabled = {props.disabled ? props.disabled : false}
     >
     {props.text?props.text:"Title"}

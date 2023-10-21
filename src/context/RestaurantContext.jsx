@@ -1,21 +1,24 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getResturantsRequest,getResturantRequest,deleteResturantRequest, createResturantRequest } from "../api/Restaurant.pi";
+import { getResturantsRequest,getResturantRequest,deleteResturantRequest, createResturantRequest, updateResturantRequest } from "../api/Restaurant.pi";
 
 const RestaurantContext = createContext();
 export function RestaurantProvider({ children }) {
     const [restaurants, setRestaurants] = useState(null);
     const [errors,setErrors] = useState([])
+    const [messages,setMessages] = useState(null)
+
     const [isLoading,setIsLoading] = useState(true)
 
   // Eliminar errores despues de 5 segundos
   useEffect(() => {
-    if (errors.length > 0) {
+    if (errors.length > 0 || messages !== null) {
       const timer = setTimeout(() => {
         setErrors([]);
+        setMessages(null)
       }, 3000);
       return () => clearTimeout(timer);
     }
-  }, [errors]);
+  }, [errors,messages]);
 
   const getRestaurants = async () => {
     try {
@@ -52,8 +55,18 @@ export function RestaurantProvider({ children }) {
       setErrors(error.response.data)
     }
   }
+
+  const updateRestaurant = async (restaurant_id,restaurant_data)=>{
+    try {
+      await updateResturantRequest(restaurant_id,restaurant_data)
+    } catch (error) {
+      console.log(error)
+    }
+      
+  }
+
     return (
-        <RestaurantContext.Provider value={{isLoading,errors,getRestaurant,deleteRestaurant,getRestaurants,restaurants,setIsLoading,createRestaurant}}>
+        <RestaurantContext.Provider value={{messages,setMessages,isLoading,errors,getRestaurant,deleteRestaurant,getRestaurants,restaurants,setIsLoading,createRestaurant,updateRestaurant}}>
       {children}
     </RestaurantContext.Provider>
   );

@@ -23,3 +23,7 @@ export async function deleteImage(filename) {
     const storageRef = ref(storage,'profiles/' + filename)
     await deleteObject(storageRef)
 }
+export async function deleteImage2(filename) {
+  const storageRef = ref(storage,filename)
+  await deleteObject(storageRef)
+}

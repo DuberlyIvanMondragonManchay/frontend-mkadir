@@ -58,7 +58,7 @@ export default function RestaurantAdminPage() {
                                                 <p className='text-2xl text-white'>{restaurant.name.charAt()}</p>
                                             </div>      
                                             :
-                                            <img data-tooltip-target="tooltip-jese" class="w-10 h-10 object-cover rounded-full ring-gray-300 dark:ring-gray-500"  src={restaurant.logo_url} alt="Medium avatar"/>
+                                            <img data-tooltip-target="tooltip-jese" className="w-10 h-10 object-cover rounded-full ring-gray-300 dark:ring-gray-500"  src={restaurant.logo_url} alt="Medium avatar"/>
                                         }
                                         </div>
                                     </td>

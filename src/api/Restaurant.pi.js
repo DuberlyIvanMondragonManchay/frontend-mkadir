@@ -8,5 +8,6 @@ export const createResturantRequest = async (restaurant) => await axios.post('re
 export const getResturantsRequest = async () => await axios.get('restaurants/');
 export const getResturantRequest = async (restaurant_id) => await axios.get(`restaurants/${restaurant_id}`);
 export const deleteResturantRequest = async (restaurant_id) => await axios.delete(`restaurants/delete/${restaurant_id}`);
+export const updateResturantRequest = async (restaurant_id,restaurant_data) => await axios.put(`restaurants/update/${restaurant_id}`,restaurant_data);
 
 export const getMenuIsPublishedRequest = async (restaurant_id) => await axios.get(`restaurants/${restaurant_id}/menus/is-published`)
