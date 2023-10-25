@@ -12,24 +12,24 @@ export default function AdminPage() {
 
       <div className="grid grid-cols-2 gap-4">
         <CardAdmin 
-        car_img={activeUser}
+        card_img={activeUser}
         card_title = "Mi cuenta"
         />
         <CardAdmin 
-        car_img={activeRestaurant}
+        card_img={activeRestaurant}
         card_title = "Mis restaurantes"
-        to_url="restaurants"
+        card_url="restaurants/"
         />
         <CardAdmin 
-        car_img={food}
+        card_img={food}
         card_title = "Mis platos"
         />
         <CardAdmin 
-        car_img={schedule}
+        card_img={schedule}
         card_title = "Horario de trabajo"
         />
         <CardAdmin 
-        car_img={employees}
+        card_img={employees}
         card_title = "Empleados"
         />
       </div>

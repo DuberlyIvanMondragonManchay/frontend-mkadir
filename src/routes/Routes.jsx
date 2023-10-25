@@ -3,7 +3,7 @@ import { Outlet, useRoutes } from 'react-router-dom';
 import RestaurantsRoutes from './Restaurants.routes'
 import ProfileRoutes from './Profile.routes';
 import auth_routes from './Auth.routes';
-import admin_routes from './Admin.routes'
+import admin_routes from '../routes/admin/Admin.routes'
 import HomePage from '../pages/HomePage'
 import IsAuthenticated from '../middlewares/IsAuthenticated';
 import AuthRequired from '../middlewares/AuthRequired';

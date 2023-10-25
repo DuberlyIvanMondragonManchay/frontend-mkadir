@@ -238,10 +238,10 @@ export default function FormRestaurant() {
       {restaurant_id?
       <div className='flex gap-2  justify-center mt-3'>
           <div className="grid grid-cols-2 gap-4">
-            <CardAdmin car_img={employees} card_title = "Mis empleados"/>
-            <CardAdmin car_img={menu} card_title = "Mi menú"/>
-            <CardAdmin car_img={schedule} card_title = "Horario de trabajo"/>
-            <CardAdmin car_img={food} card_title = "Mi platos"/>
+            <CardAdmin card_img={employees} card_title = "Mis empleados"/>
+            <CardAdmin card_url={`/admin/restaurants/${restaurant_id}/menus`} card_img={menu} card_title = "Mi menú"/>
+            <CardAdmin card_img={schedule} card_title = "Horario de trabajo"/>
+            <CardAdmin card_img={food} card_title = "Mi platos"/>
             
           </div>
       </div>

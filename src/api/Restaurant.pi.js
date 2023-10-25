@@ -1,6 +1,7 @@
 import axios from './axiosConfig.js'
 
-export const getAllResturantsRequest = async () => await axios.get('restaurants/all');
+export const getAllResturantsRequest = async (limit) => await axios.get(`restaurants/all/${limit}`);
+export const getPagesResturantsRequest = async (page) => await axios.get(`restaurants/pages?page=${page}`);
 
 export const createResturantsRequest = async (restaurant) => await axios.post('restaurants/register',restaurant);
 

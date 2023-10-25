@@ -77,7 +77,7 @@ export function RestaurantProvider({ children }) {
 export function useRestaurantContext() {
   const context = useContext(RestaurantContext);
   if (!context) {
-    throw new Error("useRestaurant debe usarse dentro de un AuthProvider");
+    throw new Error("useRestaurantContext debe usarse dentro de un RestaurantProvider");
   }
   return context;
 }

@@ -4,6 +4,7 @@ import { Link, Outlet, useNavigate,useParams } from 'react-router-dom';
 import { useRestaurantContext } from '../../../context/RestaurantContext';
 import SpinerComponent from '../../../components/SpinerComponent';
 import RestaurantDoc from '../../../components/documentation/RestaurantDoc'
+import LoadingPage from '../../LoadingPage';
 export default function RestaurantAdminPage() {
     const { restaurants,getRestaurants ,isLoading} = useRestaurantContext()
     const [search, setSearch] = useState('');
@@ -24,13 +25,13 @@ export default function RestaurantAdminPage() {
         getRestaurants()
     }, []);
 
-    if (restaurant_id) return <Outlet/>
+    if (restaurant_id) return <LoadingPage/>
     return (
         <div className="overflow-x-auto mx-1">
             <h1 className="text-2xl my-5 text-center">Administrar mis Restaurantes</h1>
             {isLoading? <div className='mt-10'><SpinerComponent/></div>: 
-            results?
-            results.length > 0 ? 
+            restaurants?
+            restaurants.length > 0 ? 
             <div className="max-w-full text-end overflow-hidden">
                 <SearchComponent value={search} onChange={searcher} />
                     <div className='flex justify-end'>

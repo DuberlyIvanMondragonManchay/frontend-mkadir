@@ -17,8 +17,8 @@ const CardPublication = (props) => {
       <Slider {...settings}>
         {props.carouselData.map((item, index) => (
           <div key={index}>
-            <img src={item.image} alt={`Imagen ${index + 1}`} />
-            <p className='mt-2'>{item.caption}</p>
+            <p className='font-semibold my-2 ml-2'>{item.description}</p>
+            <img src={item.img_menu_url} alt={`Imagen ${props.menu_name}`} />
           </div>
         ))}
       </Slider>
