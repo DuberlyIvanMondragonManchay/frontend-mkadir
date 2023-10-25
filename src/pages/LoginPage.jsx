@@ -1,11 +1,12 @@
 import { Formik } from 'formik'
 import { Alert } from "@mui/material";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ButtonPrimary,InputForm } from '../components/specific/ComponentsForm'
 import SpinerComponent from '../components/SpinerComponent'
 import { useAuth } from '../context/AuthContext';
 export default function LoginPage() {
   const {loginUserAuth,errors} = useAuth()
+  const navigateTo = useNavigate()
 
   return (
     <div className="m-2">
@@ -22,7 +23,8 @@ export default function LoginPage() {
       onSubmit={async (values) => {
         const res= await loginUserAuth(values)
         if(res.data){
-          window.location.reload();  
+          navigateTo('/profile')
+          // window.location.reload();  
         }
       }}
     >
