@@ -35,7 +35,7 @@ export default function CardRestaurant(props) {
           </div>
             <div className='ml-4 w-full flex justify-between mr-3'>
                 <div>
-                  <p className='text-lg font-bold text-gray-600'>{props.card_title}</p>
+                  <p className='text-lg font-bold text-black-600'>{props.card_title}</p>
                 </div>
                 
                 <div className='flex items-center'>

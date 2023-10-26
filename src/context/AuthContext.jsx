@@ -5,8 +5,8 @@ import { createResturantsRequest, getResturantRequest } from "../api/Restaurant.
 
 const AuthContext = createContext();
 export function AuthProvider({ children }) {
-    // const cookies = new Cookies()
     const [user, setUser] = useState(null);
+    const [isAuthenticate, setIsAuthenticate] = useState(false);
     const [restaurantData, setRestaurantData] = useState(null);
     const [errors,setErrors] = useState([])
     const [isLoading,setIsLoading] = useState(true)
@@ -18,11 +18,9 @@ export function AuthProvider({ children }) {
         const restaurantData = await JSON.parse(window.localStorage.getItem('restaurantRegister'))
         if(userData){
           const res_user = await registerRequest(userData)
-          console.log(userData)
           if(restaurantData){
             try {
               const res_restaurant = await createResturantsRequest({...restaurantData,user:res_user.data.id})
-              console.log(restaurantData)
               return res_restaurant
             } catch (error) {
               console.log(error)

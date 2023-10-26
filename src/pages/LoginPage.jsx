@@ -23,8 +23,7 @@ export default function LoginPage() {
       onSubmit={async (values) => {
         const res= await loginUserAuth(values)
         if(res.data){
-          navigateTo('/profile')
-          // window.location.reload();  
+          window.location.reload();  
         }
       }}
     >
