@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation,useParams  } from 'react-router-dom';
+import { useLocation,useNavigate,useParams  } from 'react-router-dom';
 import inactive_home from '../imgs/icons-inactive/inactive_home.svg'
 import inactive_employees from '../imgs/icons-inactive/inactive_employees.svg'
 import inactive_timetable from '../imgs/icons-inactive/inactive_timetable.svg'
@@ -18,8 +18,9 @@ import {BsSearch} from 'react-icons/bs'
 import { useRestaurantContext } from "../context/RestaurantContext";
 export default function Navigation() {
   let location = useLocation();
+  const navigateTo=useNavigate()
   const {user,isLoading,restaurantData} = useAuth()
-  const [visibleSearch,setVisibleSeach] = useState(true)
+  const [visibleSearch,setVisibleSeach] = useState(false)
   const {filteredRestaurants,search} = useRestaurantContext()
   const regex = /^\/restaurants\/\d+.*$/;
   const urlIsCorrect = regex.test(location.pathname) ///restaurnts/1/bla/bla/bla ... is true
@@ -27,11 +28,11 @@ export default function Navigation() {
       <div className="m-0 top-0 bg-white z-10 py-2 px-2 fixed w-full">
         {/* Navb part1 */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center"> {/* Contenedor izquierdo */}
+          <div onClick={()=>navigateTo('/')} className="flex items-center"> {/* Contenedor izquierdo */}
             <div className="w-14">
               <img className="w-full" src={logo} alt="MKADIR logo" />
             </div>
-            <h1 className={`${!visibleSearch ? "block" : "hidden"} text-2xl font-bold ml-2`}>MKADIR</h1>
+            <h1 className={`${location.pathname!=="/"?"block":!visibleSearch ? "block" : "hidden"} text-2xl font-bold ml-2`}>MKADIR</h1>
           </div>
           {location.pathname=='/'?
             <div className="w-80 mx-1 flex items-center justify-end gap-2"> {/* Contenedor derecho */}
@@ -45,9 +46,9 @@ export default function Navigation() {
         {/* Navbar */}
         <nav>
           <div className="flex flex-row items-center justify-center gap-4 text-center">
-            <Link to='/' className="col link-item"><img src={inactive_home} alt="Home Icon" /></Link>
             {isLoading?<h1>Loading</h1>:user?
             <>
+            <Link to='/' className="col link-item"><img src={inactive_home} alt="Home Icon" /></Link>
             {urlIsCorrect?
             <>
             <Link to={`/restaurants/${restaurantData?restaurantData.id:null}/work-schedule`} className="col link-item"><img src={inactive_timetable} alt="Timetable Icon" /></Link> 
