@@ -25,14 +25,14 @@ export default function Navigation() {
   const regex = /^\/restaurants\/\d+.*$/;
   const urlIsCorrect = regex.test(location.pathname) ///restaurnts/1/bla/bla/bla ... is true
     return (
-      <div className="m-0 top-0 bg-white z-10 py-2 px-2 fixed w-full">
+      <div className="m-0 top-0 bg-white z-10 py-2 px-2 fixed w-full mb-80">
         {/* Navb part1 */}
         <div className="flex items-center justify-between">
           <div onClick={()=>navigateTo('/')} className="flex items-center"> {/* Contenedor izquierdo */}
-            <div className="w-14">
-              <img className="w-full" src={logo} alt="MKADIR logo" />
+            <div className="w-5">
+              <img className="w-full" src={logo} alt="mkadir logo" />
             </div>
-            <h1 className={`${location.pathname!=="/"?"block":!visibleSearch ? "block" : "hidden"} text-2xl font-bold ml-2`}>MKADIR</h1>
+            <h1 className={`${location.pathname!=="/"?"block":!visibleSearch ? "block" : "hidden"} text-xl font-bold ml-2`}>mkadir</h1>
           </div>
           {location.pathname=='/'?
             <div className="w-80 mx-1 flex items-center justify-end gap-2"> {/* Contenedor derecho */}

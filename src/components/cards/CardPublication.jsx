@@ -15,7 +15,7 @@ const CardPublication = (props) => {
     <div className="carousel-container">
       <Slider {...settings}>
         {props.carouselData.map((item, index) => (
-          <div key={index} style={{ height: "300px" }} className="p-4 overflow-hidden flex flex-col">
+          <div key={index} className="p-4 overflow-hidden flex flex-col">
             <div style={{ height:"50px" }} className="mb-1 overflow-y-auto">
               <p className='ml-2'>{item.description}</p>
             </div>
