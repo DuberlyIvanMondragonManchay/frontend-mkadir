@@ -8,6 +8,7 @@
     display: flex !important;
     text-align: center !important;
     justify-content: center !important;
+    height: 44px !important;
 }
 .link-item:hover{
     background-color: rgba(158, 154, 154, 0.295);
@@ -23,4 +24,18 @@
 .color-text{
     color: var(--color-text) !important;
 }
-/* change */
+/* Search */
+/* Ajusta la duración y el tipo de transición según tus preferencias */
+.visible-search {
+    width: 100% !important;
+    transition: width 0.5s ease !important;
+  }
+  
+  .hidden-search {
+    width: 0 !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: width 0.5s ease, opacity 0.5s ease, visibility 0.5s;
+  }
+  
+  

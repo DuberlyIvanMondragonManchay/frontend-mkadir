@@ -14,9 +14,9 @@ import Routes from './routes/Routes'
         <RegisterProvider>
           <RestaurantProvider>
             <MenuProvider>
-              <Routes/>
-              <div className='py-5 my-9'></div>
               <Navigation/>
+              <div className='py-5 my-10'></div>
+              <Routes/>
             </MenuProvider>
           </RestaurantProvider>
         </RegisterProvider>

@@ -6,6 +6,7 @@ export function RestaurantProvider({ children }) {
     const [restaurants, setRestaurants] = useState(null);
     const [errors,setErrors] = useState([])
     const [messages,setMessages] = useState(null)
+    const [search, setSearch] = useState('');
 
     const [isLoading,setIsLoading] = useState(true)
 
@@ -65,8 +66,12 @@ export function RestaurantProvider({ children }) {
       
   }
 
+  const filteredRestaurants = (e) => {
+    setSearch(e.target.value);
+  }
+
     return (
-        <RestaurantContext.Provider value={{messages,setMessages,isLoading,errors,getRestaurant,deleteRestaurant,getRestaurants,restaurants,setIsLoading,createRestaurant,updateRestaurant}}>
+        <RestaurantContext.Provider value={{search,filteredRestaurants,messages,setMessages,isLoading,errors,getRestaurant,deleteRestaurant,getRestaurants,restaurants,setIsLoading,createRestaurant,updateRestaurant}}>
       {children}
     </RestaurantContext.Provider>
   );

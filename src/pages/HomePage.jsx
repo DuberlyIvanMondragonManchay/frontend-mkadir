@@ -4,6 +4,7 @@ import SearchComponent from '../components/SearchComponent';
 import CardRestaurant from '../components/cards/CardRestaurant';
 import { getPagesResturantsRequest } from '../api/Restaurant.pi';
 import SpinerComponent from '../components/SpinerComponent';
+import { useRestaurantContext } from '../context/RestaurantContext';
 
 export default function HomePage() {
   const [restaurants, setRestaurants] = useState([]);
@@ -11,8 +12,9 @@ export default function HomePage() {
   const [pagesCount, setPagesCount] = useState(2)
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
-  const [search, setSearch] = useState('');
   const elementRef = useRef(null);
+  // Restaurant context
+  const {search} = useRestaurantContext()
 
   const getData = async (pageNum) => {
     try {
@@ -49,10 +51,6 @@ export default function HomePage() {
     }
   };
 
-  const handleSearchChange = (e) => {
-    setSearch(e.target.value);
-  };
-
   const filteredResults = !search
     ? restaurants
     : restaurants.filter((restaurant) =>
@@ -60,10 +58,8 @@ export default function HomePage() {
       );
 
   return (
-    <div className="m-2 mt-4">
-      <h1 className="text-3xl my-5 text-center">Restaurantes</h1>
+    <div className="mx-2 ">
       <CarrouselComponent />
-      <SearchComponent value={search} onChange={handleSearchChange} />
       {isLoading ? <SpinerComponent /> : 
         filteredResults.map((restaurant, index) => (
           <CardRestaurant
@@ -73,6 +69,7 @@ export default function HomePage() {
             card_title={restaurant.name}
             LinkTo={`/restaurants/${restaurant.id}/details/menu`}
             is_open={restaurant.is_open}
+            menus={restaurant.menus}
           />
         ))
       }
