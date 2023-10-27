@@ -25,7 +25,7 @@ export default function CardRestaurant(props) {
                 </div>
           </div>
         </div>
-        <div className='mt-2'>
+        <div className='mt-2 flex justify-center items-center'>
           {props.menus.length <=0 ? <h1 className='text-center'>No menus</h1>:
           <CardPublication carouselData={props.menus}/>}
         </div>
