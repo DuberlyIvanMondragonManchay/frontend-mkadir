@@ -12,15 +12,15 @@ const CardPublication = (props) => {
   };
 
   return (
-    <div className="carousel-container w-72 flex flex-col">
+    <div className="carousel-container overflow-hidden w-full flex flex-col">
       <Slider {...settings}>
         {props.carouselData.map((item, index) => (
           <div key={index} className="p-4 overflow-hidden flex flex-col justify-center items-center">
             <div style={{ height:"50px" }} className="mb-1 overflow-y-auto">
-              <p className='ml-2'>{item.description}</p>
+              <p className='ml-1'>{item.description}</p>
             </div>
-            <div style={{ height: "350px" }} className="max-h-full max-w-full overflow-y-auto flex justify-center items-center">
-              <img className='m-auto max-h-full max-w-full object-center object-cover' src={item.img_menu_url} alt={`Imagen ${props.menu_name}`} />
+            <div style={{ height: "460px" }} className="max-h-full max-w-full overflow-y-auto flex justify-center items-center">
+              <img className='m-auto object-center object-cover' src={item.img_menu_url} alt={`Imagen ${props.menu_name}`} />
             </div>
           </div>
         ))}

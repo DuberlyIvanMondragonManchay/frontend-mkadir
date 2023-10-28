@@ -15,7 +15,7 @@ import Routes from './routes/Routes'
           <RestaurantProvider>
             <MenuProvider>
               <Navigation/>
-              <div className='py-5 my-10'></div>
+              <div id='space_navbar' className='py-5 my-10'></div>
               <Routes/>
             </MenuProvider>
           </RestaurantProvider>

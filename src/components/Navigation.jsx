@@ -17,6 +17,8 @@ import SearchComponent from './SearchComponent'
 import {BsSearch} from 'react-icons/bs'
 import { useRestaurantContext } from "../context/RestaurantContext";
 import SpinerComponent from "./SpinerComponent";
+import Avatar from "./specific/Avatar";
+
 export default function Navigation() {
   let location = useLocation();
   const navigateTo=useNavigate()
@@ -25,23 +27,37 @@ export default function Navigation() {
   const {filteredRestaurants,search} = useRestaurantContext()
   const regex = /^\/restaurants\/\d+.*$/;
   const urlIsCorrect = regex.test(location.pathname) ///restaurnts/1/bla/bla/bla ... is true
-    return (
+  // Is not user remove space_navbar
+  if(!user) {
+    const spaceNavbar = document.getElementById('space_navbar');
+    if (spaceNavbar) {
+      spaceNavbar.classList.remove('my-10');
+      spaceNavbar.classList.add('my-2');
+    }
+  }
+  
+  return ( 
       <div className="m-0 top-0 bg-white z-10 py-2 px-2 fixed w-full mb-80">
         {/* Navb part1 */}
-        <div className={`${location.pathname!=="/"?"hidden":"block"} flex items-center justify-between`}>
+        <div className={`${location.pathname!=="/"?"hidden":"block"} flex items-center justify-between md:justify-start`}>
           <div onClick={()=>navigateTo('/')} className="flex items-center"> {/* Contenedor izquierdo */}
             <div className="w-5">
               <img className="w-full" src={logo} alt="mkadir logo" />
             </div>
-            <h1 className={`${!visibleSearch ? "block" : "hidden"} text-xl font-bold ml-2`}>mkadir</h1>
+            <h1 className={`${!visibleSearch ? "block" : "hidden"} md:block text-xl font-bold ml-2`}>mkadir</h1>
           </div>
           {location.pathname=='/'?
             <div className="w-80 mx-1 flex items-center justify-end gap-2"> {/* Contenedor derecho */}
-            <SearchComponent className={visibleSearch ? "visible-search" : "hidden-search"} value={search}  onChange={filteredRestaurants} />
-              <BsSearch onClick={()=>setVisibleSeach(!visibleSearch)} style={{ fontSize: '30px' }} />
+            <SearchComponent className={`${visibleSearch ? "visible-search" : "hidden-search"} md:ml-5`} value={search}  onChange={filteredRestaurants} />
+              <BsSearch className="md:hidden block" onClick={()=>setVisibleSeach(!visibleSearch)} style={{ fontSize: '30px' }} />
             </div>
           :null}
-
+          {/* Avatar */}
+            {user? 
+            <div className="justify-end w-full md:flex hidden">
+              <Avatar logo_url={user.picture} name={user.name}/>
+            </div>
+             :null}
         </div>
 
         {/* Navbar */}

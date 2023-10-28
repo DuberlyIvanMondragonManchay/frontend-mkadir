@@ -56,7 +56,6 @@ export default function HomePage() {
     : restaurants.filter((restaurant) =>
         restaurant.name.toLowerCase().includes(search.toLowerCase())
       );
-
   return (
     <div className="mx-2 ">
       <CarrouselComponent />

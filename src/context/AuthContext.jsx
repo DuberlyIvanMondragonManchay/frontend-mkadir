@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getUserRequest, loginRequest, registerRequest, verifyPasswordRequest } from "../api/auth.api";
+import { getUserRequest, loginRequest, logoutRequest, registerRequest, verifyPasswordRequest } from "../api/auth.api";
 import { createResturantsRequest, getResturantRequest } from "../api/Restaurant.pi";
+import { useNavigate } from "react-router-dom";
 // import Cookies from 'universal-cookie';
 
 const AuthContext = createContext();
@@ -10,6 +11,7 @@ export function AuthProvider({ children }) {
     const [restaurantData, setRestaurantData] = useState(null);
     const [errors,setErrors] = useState([])
     const [isLoading,setIsLoading] = useState(true)
+    const navigateTo = useNavigate()
 
 
     const registerUserAuth = async ()=> {
@@ -50,6 +52,15 @@ export function AuthProvider({ children }) {
       setIsLoading(false)
       return res
     }
+
+    const logout = async() => {
+      const res = await logoutRequest();
+      setIsLoading(false);
+      deleteCookie('jwt'); // Elimina la cookie llamada 'jwt'
+      navigateTo('/');
+      console.log(res);
+    } 
+
   // Eliminar errores despues de 5 segundos
   useEffect(() => {
     if (errors.length > 0) {
@@ -80,7 +91,7 @@ export function AuthProvider({ children }) {
   },[user])
 
   return (
-    <AuthContext.Provider value={{isLoading,registerUserAuth,errors,loginUserAuth,user,getRestaurant,restaurantData,verifyPassword}}>
+    <AuthContext.Provider value={{logout,isLoading,registerUserAuth,errors,loginUserAuth,user,getRestaurant,restaurantData,verifyPassword}}>
       {children}
     </AuthContext.Provider>
   );
