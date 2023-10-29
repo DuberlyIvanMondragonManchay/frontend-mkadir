@@ -58,10 +58,6 @@ export default function HomePage() {
   return (
   <div className="flex">
     <div className='m-auto'>
-      <div className='flex justify-center flex-col items-center'>
-          <img className='cursor-pointer w-40 rounded-lg' src={duberly} alt="" />
-          <p className='mt-3'>Visita mi perfil de facebook <a href="https://www.facebook.com/JackDIvann" target='_blank' className='text-blue-600 underline mt-4 hover:text-blue-900'>aquí</a></p>
-      </div>
       <CarrouselComponent className="sm:hidden"/>
       {isLoading ? <SpinerComponent /> : 
         filteredResults.map((restaurant, index) => (
