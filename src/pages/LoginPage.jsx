@@ -6,8 +6,6 @@ import SpinerComponent from '../components/SpinerComponent'
 import { useAuth } from '../context/AuthContext';
 export default function LoginPage() {
   const {loginUserAuth,errors} = useAuth()
-  const navigateTo = useNavigate()
-
   return (
     <div className="max-w-md m-auto">
       {errors.length <= 0 ? "" : <Alert className="mt-3" severity="error">{errors}</Alert>}

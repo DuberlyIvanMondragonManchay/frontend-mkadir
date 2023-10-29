@@ -56,8 +56,7 @@ export default function HomePage() {
         restaurant.name.toLowerCase().includes(search.toLowerCase())
       );
   return (
-  <div className="">
-    <div className=''>
+  <div className="max-w-md m-auto">
       <CarrouselComponent className="sm:hidden"/>
       {isLoading ? <SpinerComponent /> : 
         filteredResults.map((restaurant, index) => (
@@ -76,7 +75,5 @@ export default function HomePage() {
       {/* Ref al último elemento de la lista */}
       <div ref={elementRef}></div>
     </div>
-  </div>
-
   );
 }
