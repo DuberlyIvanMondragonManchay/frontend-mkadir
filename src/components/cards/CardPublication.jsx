@@ -19,7 +19,7 @@ const CardPublication = (props) => {
             <div style={{ height:"50px" }} className="mb-1 overflow-y-auto">
               <p className='ml-1'>{item.description}</p>
             </div>
-            <div style={{  maxHeight:"800px" }} className="max-h-full max-w-full overflow-y-auto flex justify-center items-center">
+            <div style={{  maxHeight:"800px"}} className="sm:w-full w-80 overflow-y-auto flex justify-center items-center">
               <img className='m-auto object-center object-cover' src={item.img_menu_url} alt={`Imagen ${props.menu_name}`} />
             </div>
           </div>
