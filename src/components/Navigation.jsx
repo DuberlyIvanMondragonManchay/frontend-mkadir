@@ -28,11 +28,11 @@ export default function Navigation() {
   const regex = /^\/restaurants\/\d+.*$/;
   const urlIsCorrect = regex.test(location.pathname) ///restaurnts/1/bla/bla/bla ... is true
   // Is not user remove space_navbar
-  if(!user) {
+  if(user) {
     const spaceNavbar = document.getElementById('space_navbar');
     if (spaceNavbar) {
-      spaceNavbar.classList.remove('my-10');
-      spaceNavbar.classList.add('my-2');
+      spaceNavbar.classList.remove('my-2');
+      spaceNavbar.classList.add('my-8');
     }
   }
   

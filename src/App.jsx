@@ -7,6 +7,8 @@ import { MenuProvider } from './context/MenuContext'
 import Navigation from './components/Navigation'
 
 import Routes from './routes/Routes'
+import SidebarComonent from './components/SidebarComonent'
+import RightSidebar from './components/RightSidebar'
 
   export default function App() {
     return (
@@ -15,8 +17,13 @@ import Routes from './routes/Routes'
           <RestaurantProvider>
             <MenuProvider>
               <Navigation/>
-              <div id='space_navbar' className='py-5 my-10'></div>
-              <Routes/>
+              <SidebarComonent/>
+              <div id='space_navbar' className='py-5 my-2'></div>
+              <div className="md:p-4 sm:ml-52 xl:mr-64">
+                <Routes/>  
+              </div>
+              <RightSidebar/>
+              
             </MenuProvider>
           </RestaurantProvider>
         </RegisterProvider>

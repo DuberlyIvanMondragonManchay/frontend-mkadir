@@ -9,7 +9,7 @@ export default function FormRegisterPersonalAccount() {
   const {setUserRegister,userRegister} = useRegister()
   const {registerUserAuth,errors} = useAuth()
   return (
-    <div className="m-2">
+    <div className="max-w-md m-auto">
       {/* {errors.length <= 0 ? "" : <Alert className="mt-3" severity="error">{errors}</Alert>} */}
       <h2 className = "text-xl font-bold color-text-primary">Datos de la cuenta</h2>
 

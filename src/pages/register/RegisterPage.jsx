@@ -18,7 +18,7 @@ export default function RegisterPage() {
     };
   }, []);
   return (
-    <div className='m-2 mt-3'>
+    <div className='mt-3 max-w-md m-auto'>
       <h2 className='text-2xl font-bold color-text text-center'>Registrarse</h2>
       <Outlet/>
     </div>

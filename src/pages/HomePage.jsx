@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import CarrouselComponent from '../components/CarrouselComponent';
-import SearchComponent from '../components/SearchComponent';
 import CardRestaurant from '../components/cards/CardRestaurant';
 import { getPagesResturantsRequest } from '../api/Restaurant.pi';
 import SpinerComponent from '../components/SpinerComponent';
 import { useRestaurantContext } from '../context/RestaurantContext';
+import RightSidebar from '../components/RightSidebar';
 
 export default function HomePage() {
   const [restaurants, setRestaurants] = useState([]);
@@ -57,8 +57,9 @@ export default function HomePage() {
         restaurant.name.toLowerCase().includes(search.toLowerCase())
       );
   return (
-    <div className="mx-2 ">
-      <CarrouselComponent />
+  <div className="flex">
+    <div className='m-auto'>
+      <CarrouselComponent className="sm:hidden"/>
       {isLoading ? <SpinerComponent /> : 
         filteredResults.map((restaurant, index) => (
           <CardRestaurant
@@ -72,9 +73,11 @@ export default function HomePage() {
           />
         ))
       }
-  
+
       {/* Ref al último elemento de la lista */}
       <div ref={elementRef}></div>
     </div>
+  </div>
+
   );
 }

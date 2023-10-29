@@ -2,7 +2,7 @@ import React from 'react'
 import CardPublication from './CardPublication'
 export default function CardRestaurant(props) {
   return (
-      <div className='card_menu_restaurant py-2 my-2 block border hover:shadow-xl shadow-lg rounded-md transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-100 duration-200 cursor-pointer'>
+      <div style={{ maxWidth:"600px"}} className='bg-white card_menu_restaurant py-2 my-2 block border hover:shadow-xl shadow-lg rounded-md  cursor-pointer'>
         <div className='flex items-center '>
           
           <div className='flex justify-center items-center'>

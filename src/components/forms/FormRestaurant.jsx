@@ -93,7 +93,7 @@ export default function FormRestaurant() {
   }
   if (isLoading && !restaurant) return <SpinerComponent/>
     return (
-      <div className = "m-2">
+      <div className = "max-w-md m-auto">
       <h2 className = "text-xl font-bold color-text-primary flex justify-center gap-1"><RiAdminFill />Administrar restaurante/ <span className='text-black'>{restaurant_id?"Editar":"Crear"}</span></h2>
       {imageError === null ? "" : <Alert className="mt-3" severity="error">{imageError}</Alert>}
       
