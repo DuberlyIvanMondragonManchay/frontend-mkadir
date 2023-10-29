@@ -56,8 +56,8 @@ export default function HomePage() {
         restaurant.name.toLowerCase().includes(search.toLowerCase())
       );
   return (
-  <div className="flex">
-    <div className='m-auto'>
+  <div className="">
+    <div className=''>
       <CarrouselComponent className="sm:hidden"/>
       {isLoading ? <SpinerComponent /> : 
         filteredResults.map((restaurant, index) => (
