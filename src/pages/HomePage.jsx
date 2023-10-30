@@ -5,6 +5,7 @@ import { getPagesResturantsRequest } from '../api/Restaurant.pi';
 import SpinerComponent from '../components/SpinerComponent';
 import { useRestaurantContext } from '../context/RestaurantContext';
 import duberly from '../imgs/icons/duberly.svg';
+import NoResults from '../components/specific/NoResults';
 export default function HomePage() {
   const [restaurants, setRestaurants] = useState([]);
   const [page, setPage] = useState(1);
@@ -72,7 +73,7 @@ export default function HomePage() {
             menus={restaurant.menus}
           />
         ))
-      :<p className='text-center mt-6'>No se encontraron resultados</p>}
+      :<NoResults/>}
 
       {/* Ref al último elemento de la lista */}
       <div ref={elementRef}></div>

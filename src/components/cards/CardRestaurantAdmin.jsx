@@ -1,9 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function CardRestaurantAdmin(props) {
+  const navigateTo = useNavigate()
   return (
-    <Link to={`/restaurants/${props.card_id}`} className="flex items-end mt-6 mb-4 rounded cursor-pointer">
+    <div onClick={()=>navigateTo(`/restaurants/${props.card_id}`)} className="flex items-end mt-6 mb-4 rounded cursor-pointer bg-white shadow-xl relative p-3">
         <div className='h-full flex m-auto'>
             <img style={{ height:"80px",width:"80px" }} className="rounded-full" src={props.card_img} alt={`logo ${props.card_title}`}/>
         </div>
@@ -18,6 +19,6 @@ export default function CardRestaurantAdmin(props) {
    
         <button className="bg-blue-600 text-sm hover:bg-blue-700 text-white py-1 px-5 rounded-md ">Cerrar</button>
 
-    </Link>
+    </div>
   )
 }

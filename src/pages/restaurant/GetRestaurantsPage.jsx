@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import SearchComponent from '../../components/SearchComponent'
 import { getResturantsRequest } from '../../api/Restaurant.pi'
 import CardRestaurantAdmin from '../../components/cards/CardRestaurantAdmin'
+import NoResults from '../../components/specific/NoResults'
 
 export default function GetRestaurantsPage() {
   const [restaurants,setRestaurants] = useState([])
@@ -21,21 +22,23 @@ export default function GetRestaurantsPage() {
   },[])
 
   return (
-    <div className='m-2 mt-4'>
-        <h1 className='text-3xl my-5 text-center'>Mis Restaurantes</h1>
+    <div className=''>
+        <h1 className='text-3xl mb-2 text-center'>Mis Restaurantes</h1>
         <SearchComponent value={search} onChange={searcher}/>
-        
-        {results.map((restaurant, index) =>(
-          <CardRestaurantAdmin
-          card_id={restaurant.id}
-          key={index}
-          card_img={restaurant.logo_url}
-          card_title={restaurant.name}
-          LinkTo={`/restaurants/${restaurant.id}/details/menu`}
-          is_open={restaurant.is_open}
-          address={restaurant.address}
-          />
-        ))}
+        <div className='mt-4 grid grid-cols-1 md:grid-cols-3 gap-4 mx-4'>
+          {results.length>0?
+          results.map((restaurant, index) =>(
+            <CardRestaurantAdmin
+            card_id={restaurant.id}
+            key={index}
+            card_img={restaurant.logo_url}
+            card_title={restaurant.name}
+            LinkTo={`/restaurants/${restaurant.id}/details/menu`}
+            is_open={restaurant.is_open}
+            address={restaurant.address}
+            />
+          )):<NoResults/>}
+        </div>
         
     </div>
   )

@@ -5,7 +5,7 @@ export default function ProfilePageIndex() {
   console.log(user)
   return (
     <div className="w-full mx-auto h-full shadow-lg rounded-lg overflow-hidden">
-      <h1 className='text-2xl my-5 text-center'>Mi perfil</h1>
+      <h1 className='text-2xl mb-2 text-center'>Mi perfil</h1>
       <div className="bg-gray-300 h-40"></div> {/* Portada gris */}
       {!user.picture? 
       <div className='flex justify-center items-center'>
