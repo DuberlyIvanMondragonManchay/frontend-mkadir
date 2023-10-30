@@ -6,15 +6,12 @@ export default function RightSidebar() {
     const {user} = useAuth()
     const location = useLocation();
     let allowedRoutes  = ['/', '/auth/login', '/auth/register/options','/auth/register/restaurant','/auth/register/personal-data']
-    const shouldShowSidebar = allowedRoutes.includes(location.pathname);
-
     useEffect(() => {
-      const rightSidebar = document.getElementById('right-sidebar-multi-level-sidebar');
       const spaceSidebar = document.getElementById('space_sidebar');
       
       // Agrega o quita la clase xl:mr-64 basándose en location.pathname y user
       if (spaceSidebar) {
-        if (location.pathname === '/' && user) {
+        if (allowedRoutes.includes(location.pathname)) {
           spaceSidebar.classList.add('xl:mr-64');
         } else {
           spaceSidebar.classList.remove('xl:mr-64');

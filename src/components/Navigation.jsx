@@ -27,98 +27,60 @@ export default function Navigation() {
   const {filteredRestaurants,search} = useRestaurantContext()
   const regex = /^\/restaurants\/\d+.*$/;
   const urlIsCorrect = regex.test(location.pathname) ///restaurnts/1/bla/bla/bla ... is true
-  // Is not user remove space_navbar
-  if(user) {
-    const spaceNavbar = document.getElementById('space_navbar');;
-    if (spaceNavbar) {
-      spaceNavbar.classList.remove('md:my-2');
-      spaceNavbar.classList.remove('md:my-7');
-      spaceNavbar.classList.remove('md:py-2');
-      spaceNavbar.classList.add('md:my-4');
-      // spaceSidebar
-    }
-    if(location.pathname!=="/"){
-      spaceNavbar.classList.remove('my-2');
-      spaceNavbar.classList.remove('my-10');
-      spaceNavbar.classList.remove('py-2');
-      spaceNavbar.classList.add('my-4');
-    }
-    
-  }
   
   return ( 
       <div className={`m-0 top-0 bg-white z-50 ${location.pathname!=="/"?"py-0":"py-2"}  px-2 fixed w-full mb-80`}>
-        {/* Navb part1 */}
-        <div className={`${location.pathname!=="/"?"hidden":"block"} md:hidden flex items-center justify-between md:justify-start`}>
-          <div onClick={()=>navigateTo('/')} className="flex items-end"> {/* Contenedor izquierdo */}
-            <div className="mb-1 w-8 h-8">
-              <img className="w-full" src={logo} alt="mkadir logo" />
+        {isLoading ? <SpinerComponent/> : 
+
+          <nav className="py-4 flex md:justify-between justify-center items-center">
+            {/* Logo and serach container*/}
+            <div className="md:flex hidden items-center justify-between md:justify-start">
+              <div onClick={()=>navigateTo('/')} className="flex items-end"> {/* Contenedor izquierdo */}
+                <div className="mb-1 w-8 h-8">
+                  <img className="w-full" src={logo} alt="mkadir logo" />
+                </div>
+                <h1 className={`${!visibleSearch ? "block" : "hidden"} md:block text-xl font-bold`}>kadir</h1>
+              </div>
+              {/* Search */}
+              {location.pathname=='/'?
+              <div className="w-80 mx-1 flex items-center justify-end"> {/* Contenedor derecho */}
+              <SearchComponent className={`${visibleSearch ? "visible-search" : "hidden-search"} md:ml-5`} value={search}  onChange={filteredRestaurants} />
+                <BsSearch className="md:hidden block" onClick={()=>setVisibleSeach(!visibleSearch)} style={{ fontSize: '30px' }} />
+              </div>
+            :null}
             </div>
-            <h1 className={`${!visibleSearch ? "block" : "hidden"} md:block text-xl font-bold`}>kadir</h1>
-          </div>
-          {location.pathname=='/'?
-            <div className="w-80 mx-1 flex items-center justify-end"> {/* Contenedor derecho */}
-            <SearchComponent className={`${visibleSearch ? "visible-search" : "hidden-search"} md:ml-5`} value={search}  onChange={filteredRestaurants} />
-              <BsSearch className="md:hidden block" onClick={()=>setVisibleSeach(!visibleSearch)} style={{ fontSize: '30px' }} />
+
+            {/* Links */}
+            {user?
+            <div className="flex flex-row items-center justify-center gap-4 text-center">
+              <Link to='/' className="col link-item"><img src={inactive_home} alt="Home Icon" /></Link>
+              {urlIsCorrect && (
+                <>
+                  <Link to={`/restaurants/${restaurantData ? restaurantData.id : null}/work-schedule`} className="col link-item"><img src={inactive_timetable} alt="Timetable Icon" /></Link>
+                  <Link to='/restaurants/menu' className="col link-item"><img src={inactive_menu} alt="Menu Icon" /></Link>
+                  <Link to={`/restaurants/${restaurantData ? restaurantData.id : null}/employees`} className="col link-item"><img src={inactive_employees} alt="Employees Icon" /></Link>
+                </>
+              )}
+              <Link to='/restaurants' className="col link-item"><img src={inactive_restaurant} alt="Restaurants Icon" /></Link>
+              <Link to='/profile' className="col link-item"><img src={inactive_user} alt="Profile Icon" /></Link>
+              <Link to='/admin' className="col link-item"><img src={inactive_menu_admin} alt="Admin Icon" /></Link>
             </div>
-          :null}
-          {/* Avatar */}
-            {user? 
-            <div className="justify-end w-full md:flex hidden">
+            :null}
+
+            <div className={`${location.pathname!=="/"?"hidden":"block"}`}></div>
+            
+            {user?
+            // Avatar
+            <div className="justify-end md:flex hidden">
               <Avatar logo_url={user.picture} name={user.name}/>
             </div>
-             :null}
-        </div>
+            :null}
 
-        {/* Navbar */}
-        {isLoading ? (
-          <SpinerComponent/>
-        ) : (
-          user && (
-            <nav className="py-4 flex md:justify-between justify-center items-center">
-              {/* Logo and serach container*/}
-              <div className="md:flex hidden items-center justify-between md:justify-start">
-                <div onClick={()=>navigateTo('/')} className="flex items-end"> {/* Contenedor izquierdo */}
-                  <div className="mb-1 w-8 h-8">
-                    <img className="w-full" src={logo} alt="mkadir logo" />
-                  </div>
-                  <h1 className={`${!visibleSearch ? "block" : "hidden"} md:block text-xl font-bold`}>kadir</h1>
-                </div>
-                {/* Search */}
-                {location.pathname=='/'?
-                <div className="w-80 mx-1 flex items-center justify-end"> {/* Contenedor derecho */}
-                <SearchComponent className={`${visibleSearch ? "visible-search" : "hidden-search"} md:ml-5`} value={search}  onChange={filteredRestaurants} />
-                  <BsSearch className="md:hidden block" onClick={()=>setVisibleSeach(!visibleSearch)} style={{ fontSize: '30px' }} />
-                </div>
-              :null}
-              </div>
-
-              {/* Links */}
-              <div className="flex flex-row items-center justify-center gap-4 text-center">
-                <Link to='/' className="col link-item"><img src={inactive_home} alt="Home Icon" /></Link>
-                {urlIsCorrect && (
-                  <>
-                    <Link to={`/restaurants/${restaurantData ? restaurantData.id : null}/work-schedule`} className="col link-item"><img src={inactive_timetable} alt="Timetable Icon" /></Link>
-                    <Link to='/restaurants/menu' className="col link-item"><img src={inactive_menu} alt="Menu Icon" /></Link>
-                    <Link to={`/restaurants/${restaurantData ? restaurantData.id : null}/employees`} className="col link-item"><img src={inactive_employees} alt="Employees Icon" /></Link>
-                  </>
-                )}
-                <Link to='/restaurants' className="col link-item"><img src={inactive_restaurant} alt="Restaurants Icon" /></Link>
-                <Link to='/profile' className="col link-item"><img src={inactive_user} alt="Profile Icon" /></Link>
-                <Link to='/admin' className="col link-item"><img src={inactive_menu_admin} alt="Admin Icon" /></Link>
-              </div>
-              <div className={`${location.pathname!=="/"?"hidden":"block"}`}></div>
-              {/* Avatar */}
-              <div className="justify-end md:flex hidden">
-                <Avatar logo_url={user.picture} name={user.name}/>
-              </div>
-            </nav>
-          )
-        )}
-
+          </nav>
+        }
       </div>
 
-    );
-  }
+  )
+}
   
   
