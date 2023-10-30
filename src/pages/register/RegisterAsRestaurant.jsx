@@ -56,7 +56,7 @@ export default function RegisterAsRestaurant() {
 
   // },[clicksCount])
   return (
-    <div className = "max-w-md m-auto">
+    <div className = "max-w-md m-auto px-2">
       <h2 className = "text-xl font-bold color-text-primary">Datos del restaurante</h2>
       {imageError === null ? "" : <Alert className="mt-3" severity="error">{imageError}</Alert>}
       <Formik

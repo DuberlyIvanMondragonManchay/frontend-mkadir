@@ -32,12 +32,13 @@ export default function Navigation() {
     const spaceNavbar = document.getElementById('space_navbar');
     if (spaceNavbar) {
       spaceNavbar.classList.remove('my-2');
+      spaceNavbar.classList.remove('py-2');
       spaceNavbar.classList.add('my-8');
     }
   }
   
   return ( 
-      <div className="m-0 top-0 bg-white z-10 py-2 px-2 fixed w-full mb-80">
+      <div className={`m-0 top-0 bg-white z-10 ${location.pathname!=="/"?"py-0":"py-2"}  px-2 fixed w-full mb-80`}>
         {/* Navb part1 */}
         <div className={`${location.pathname!=="/"?"hidden":"block"} flex items-center justify-between md:justify-start`}>
           <div onClick={()=>navigateTo('/')} className="flex items-end"> {/* Contenedor izquierdo */}

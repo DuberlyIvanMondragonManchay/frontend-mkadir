@@ -7,7 +7,7 @@ import { useAuth } from '../context/AuthContext';
 export default function LoginPage() {
   const {loginUserAuth,errors} = useAuth()
   return (
-    <div className="max-w-md m-auto">
+    <div className="max-w-md m-auto px-2">
       {errors.length <= 0 ? "" : <Alert className="mt-3" severity="error">{errors}</Alert>}
       <h1 className="mt-3 color-text-primary font-semibold text-2xl text-center">
             <span className="color-text">¡Hola</span>, te damos la{" "}
@@ -63,5 +63,6 @@ export default function LoginPage() {
       )}
     </Formik>
   </div>
+  
   )
 }
