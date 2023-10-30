@@ -40,11 +40,11 @@ export default function Navigation() {
       <div className="m-0 top-0 bg-white z-10 py-2 px-2 fixed w-full mb-80">
         {/* Navb part1 */}
         <div className={`${location.pathname!=="/"?"hidden":"block"} flex items-center justify-between md:justify-start`}>
-          <div onClick={()=>navigateTo('/')} className="flex items-center"> {/* Contenedor izquierdo */}
-            <div className="w-5">
+          <div onClick={()=>navigateTo('/')} className="flex items-end"> {/* Contenedor izquierdo */}
+            <div className="mb-1 w-8 h-8">
               <img className="w-full" src={logo} alt="mkadir logo" />
             </div>
-            <h1 className={`${!visibleSearch ? "block" : "hidden"} md:block text-xl font-bold ml-2`}>mkadir</h1>
+            <h1 className={`${!visibleSearch ? "block" : "hidden"} md:block text-xl font-bold`}>kadir</h1>
           </div>
           {location.pathname=='/'?
             <div className="w-80 mx-1 flex items-center justify-end gap-2"> {/* Contenedor derecho */}
