@@ -59,7 +59,7 @@ export default function HomePage() {
   return (
   <div className="max-w-xl m-auto">
       <CarrouselComponent className="sm:hidden"/>
-      {isLoading ? <SpinerComponent /> : 
+      {isLoading ? <div className='text-center mt-6'> <SpinerComponent /></div> : 
       filteredResults.length > 0 ?
 
         filteredResults.map((restaurant, index) => (

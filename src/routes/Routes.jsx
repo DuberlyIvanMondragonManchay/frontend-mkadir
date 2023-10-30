@@ -7,10 +7,12 @@ import admin_routes from '../routes/admin/Admin.routes'
 import HomePage from '../pages/HomePage'
 import IsAuthenticated from '../middlewares/IsAuthenticated';
 import AuthRequired from '../middlewares/AuthRequired';
+import NotFoundPage from '../pages/NotFoundPage';
 export default function Routes() {
     
   const routes = useRoutes([
     { path: "/", element: <HomePage/> },
+    { path: "*", element: <NotFoundPage/> },
     { path: "auth/*", element: <IsAuthenticated/> ,children:auth_routes},
     { path: "profile/*", element: <AuthRequired/>,children:ProfileRoutes},
     { path: "restaurants/*", element: <Outlet/>,children:RestaurantsRoutes},
