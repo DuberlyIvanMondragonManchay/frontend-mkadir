@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { useLocation,useNavigate,useParams  } from 'react-router-dom';
-import inactive_home from '../imgs/icons-inactive/inactive_home.svg'
+import { useLocation,useNavigate } from 'react-router-dom';
 import inactive_employees from '../imgs/icons-inactive/inactive_employees.svg'
 import inactive_timetable from '../imgs/icons-inactive/inactive_timetable.svg'
 import inactive_menu from '../imgs/icons-inactive/inactive_menu.svg'
-import inactive_restaurant from '../imgs/icons-inactive/inactive_restaurant.svg'
-import inactive_user from '../imgs/icons-inactive/inactive_user.svg'
-import inactive_menu_admin from '../imgs/icons-inactive/inactive_menu_admin.svg'
+
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+// Material ui
+import { BottomNavigation, BottomNavigationAction } from '@mui/material'
 // import logo MKADIR
 import logo from '../imgs/logo.svg'
 // Import search 
@@ -18,9 +17,14 @@ import {BsSearch} from 'react-icons/bs'
 import { useRestaurantContext } from "../context/RestaurantContext";
 import SpinerComponent from "./SpinerComponent";
 import Avatar from "./specific/Avatar";
+// React icon
+import {AiFillHome} from 'react-icons/ai'
+import {FaStore} from 'react-icons/fa'
+import {BiSolidUser,BiMenu} from 'react-icons/bi'
 
 export default function Navigation() {
   let location = useLocation();
+  const [value, setValue] = React.useState(0);
   const navigateTo=useNavigate()
   const {user,isLoading,restaurantData} = useAuth()
   const [visibleSearch,setVisibleSeach] = useState(false)
@@ -30,20 +34,37 @@ export default function Navigation() {
   
   return ( 
       <div className={`m-0 top-0 bg-white z-50 ${location.pathname!=="/"?"py-0":"py-2"}  px-2 fixed w-full mb-80`}>
-        {isLoading ? <SpinerComponent/> : 
-
-          <nav className="py-4 flex md:justify-between justify-center items-center">
-            {/* Logo and serach container*/}
-            <div className="md:flex hidden items-center justify-between md:justify-start">
+        {/* Logo and serach container*/}
+        <div className="md:hidden flex items-center justify-between">
               <div onClick={()=>navigateTo('/')} className="flex items-end"> {/* Contenedor izquierdo */}
                 <div className="mb-1 w-8 h-8">
                   <img className="w-full" src={logo} alt="mkadir logo" />
                 </div>
-                <h1 className={`${!visibleSearch ? "block" : "hidden"} md:block text-xl font-bold`}>kadir</h1>
+                <h1 className={`text-xl font-bold`}>kadir</h1>
               </div>
               {/* Search */}
               {location.pathname=='/'?
-              <div className="w-80 mx-1 flex items-center justify-end"> {/* Contenedor derecho */}
+              <div className="w-80 gap-1 flex items-center justify-end"> {/* Contenedor derecho */}
+              <SearchComponent className={`${visibleSearch ? "visible-search" : "hidden-search"} md:ml-5`} value={search}  onChange={filteredRestaurants} />
+                <BsSearch className="" onClick={()=>setVisibleSeach(!visibleSearch)} style={{ fontSize: '30px' }} />
+              </div>
+            :null}
+        </div>
+
+
+        {isLoading ? <SpinerComponent/> : 
+          <nav className="py-4 flex md:justify-between justify-center items-center">
+            {/* Logo and serach container*/}
+            <div className={`flex items-center justify-between md:justify-start`}>
+              <div onClick={()=>navigateTo('/')} className=" hidden md:flex items-end"> {/* Contenedor izquierdo */}
+                <div className="mb-1 w-8 h-8">
+                  <img className="w-full" src={logo} alt="mkadir logo" />
+                </div>
+                <h1 className={`text-xl font-bold`}>kadir</h1>
+              </div>
+              {/* Search */}
+              {location.pathname=='/'?
+              <div className="w-80 mx-1 md:flex hidden items-center justify-end"> {/* Contenedor derecho */}
               <SearchComponent className={`${visibleSearch ? "visible-search" : "hidden-search"} md:ml-5`} value={search}  onChange={filteredRestaurants} />
                 <BsSearch className="md:hidden block" onClick={()=>setVisibleSeach(!visibleSearch)} style={{ fontSize: '30px' }} />
               </div>
@@ -53,7 +74,6 @@ export default function Navigation() {
             {/* Links */}
             {user?
             <div className="flex flex-row items-center justify-center gap-4 text-center">
-              <Link to='/' className="col link-item"><img src={inactive_home} alt="Home Icon" /></Link>
               {urlIsCorrect && (
                 <>
                   <Link to={`/restaurants/${restaurantData ? restaurantData.id : null}/work-schedule`} className="col link-item"><img src={inactive_timetable} alt="Timetable Icon" /></Link>
@@ -61,9 +81,14 @@ export default function Navigation() {
                   <Link to={`/restaurants/${restaurantData ? restaurantData.id : null}/employees`} className="col link-item"><img src={inactive_employees} alt="Employees Icon" /></Link>
                 </>
               )}
-              <Link to='/restaurants' className="col link-item"><img src={inactive_restaurant} alt="Restaurants Icon" /></Link>
-              <Link to='/profile' className="col link-item"><img src={inactive_user} alt="Profile Icon" /></Link>
-              <Link to='/admin' className="col link-item"><img src={inactive_menu_admin} alt="Admin Icon" /></Link>
+            <BottomNavigation showLabels value={value} onChange={(event, newValue) => { setValue(newValue); }}>
+              <BottomNavigationAction onClick={() => navigateTo('/')} label="Home" style={{ color: value === 0 ? '#307A59' : null }} icon={<AiFillHome style={{ fontSize: 30, color: value === 0 ? '#307A59' : null }} />} />
+              <BottomNavigationAction onClick={() => navigateTo('/restaurants')} label="Restaurants" style={{ color: value === 1 ? '#307A59' : null }} icon={<FaStore style={{ fontSize: 30, color: value === 1 ? '#307A59' : null }} />} />
+              <BottomNavigationAction onClick={() => navigateTo('/profile')} label="Profile" style={{ color: value === 2 ? '#307A59' : null }} icon={<BiSolidUser style={{ fontSize: 30, color: value === 2 ? '#307A59' : null }} />} />
+              <BottomNavigationAction onClick={() => navigateTo('/admin')} label="Admin" style={{ color: value === 3 ? '#307A59' : null }} icon={<BiMenu style={{ fontSize: 30, color: value === 3 ? '#307A59' : null }} />} />
+            </BottomNavigation>
+
+
             </div>
             :null}
 

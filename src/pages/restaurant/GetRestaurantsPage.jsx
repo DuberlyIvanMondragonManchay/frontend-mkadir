@@ -26,7 +26,7 @@ export default function GetRestaurantsPage() {
         <h1 className='text-3xl mb-2 text-center'>Mis Restaurantes</h1>
         <SearchComponent value={search} onChange={searcher}/>
         <div className='mt-4 grid grid-cols-1 md:grid-cols-3 gap-4 mx-4'>
-          {results.length>0?
+          {
           results.map((restaurant, index) =>(
             <CardRestaurantAdmin
             card_id={restaurant.id}
@@ -37,7 +37,7 @@ export default function GetRestaurantsPage() {
             is_open={restaurant.is_open}
             address={restaurant.address}
             />
-          )):<NoResults/>}
+          ))}
         </div>
         
     </div>

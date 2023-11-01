@@ -18,7 +18,7 @@ import RightSidebar from './components/RightSidebar'
             <MenuProvider>
               <Navigation/>
               <SidebarComonent/>
-                <div className='py-7 md:my-2'></div>
+                <div className='py-14 md:my-2'></div>
                 <div id='space_sidebar' className='p-4 md:ml-64 xl:mr-64'>
                   <Routes/>  
                 </div>

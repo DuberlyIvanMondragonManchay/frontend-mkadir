@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
-    const [isAuthenticate, setIsAuthenticate] = useState(false);
     const [restaurantData, setRestaurantData] = useState(null);
     const [errors,setErrors] = useState([])
     const [isLoading,setIsLoading] = useState(true)
@@ -54,11 +53,10 @@ export function AuthProvider({ children }) {
     }
 
     const logout = async() => {
-      const res = await logoutRequest();
+      await logoutRequest();
       setIsLoading(false);
       deleteCookie('jwt'); // Elimina la cookie llamada 'jwt'
-      navigateTo('/');
-      console.log(res);
+      return navigateTo('/');
     } 
 
   // Eliminar errores despues de 5 segundos

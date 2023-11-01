@@ -5,7 +5,7 @@ import {FcAdvertising} from 'react-icons/fc'
 export default function RightSidebar() {
     const {user} = useAuth()
     const location = useLocation();
-    let allowedRoutes  = ['/', '/auth/login', '/auth/register/options','/auth/register/restaurant','/auth/register/personal-data']
+    let allowedRoutes  = ['/', '/auth/login', '/auth/register/options','/auth/register/restaurant','/auth/register/personal-data','/auth/register/personal-account']
     useEffect(() => {
       const spaceSidebar = document.getElementById('space_sidebar');
       
