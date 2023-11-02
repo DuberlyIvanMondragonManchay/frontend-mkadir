@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getMenusIsPublishedRequest, getMenusRequest } from "../api/Menu.api";
+import { createMenuRequest, deleteMenuRequest, getMenuRequest, getMenusIsPublishedRequest, getMenusRequest, updateMenuRequest } from "../api/Menu.api";
 
 const MenuContext = createContext();
 export function MenuProvider({ children }) {
@@ -24,7 +24,6 @@ export function MenuProvider({ children }) {
   const getMenus = async (restaurant_id) => {
     try {
         const res = await getMenusRequest(restaurant_id)
-        console.log(res)
         setMenus(res.data)
         setIsLoading(false)
     } catch (error) {
@@ -32,31 +31,35 @@ export function MenuProvider({ children }) {
     }
     }
 
-  const deleteMenu = async (menu_id) => {
+  const deleteMenu = async (restaurant_id,menu_id) => {
     try {
-        console.log("Delete menu")
-    } catch (error) {
+       const res = await deleteMenuRequest(restaurant_id,menu_id)
+       return res
+      } catch (error) {
         console.log(error)        
     }
     }
     
-  const getMenu = async (menu_id) => {
-    console.log("get Menu")
+  const getMenu = async (restaurant_id,menu_id) => {
+    const res = await getMenuRequest(restaurant_id,menu_id)
     setIsLoading(false)
+    return res
   }
 
-  const createRestaurant = async (restaurant) => {
+  const createMenu = async (restaurant_id,menu) => {
     try {
-      console.log("Create menu")
+      return await createMenuRequest(restaurant_id,menu)
+     
     } catch (error) {
       console.log(error)
       setErrors(error.response.data)
     }
   }
 
-  const updateRestaurant = async (restaurant_id,restaurant_data)=>{
+  const updateMenu = async (restaurant_id,menu_id,menu_data)=>{
     try {
-      console.log("Update Menu")
+      const res = await updateMenuRequest(restaurant_id,menu_id,menu_data)
+      return res
     } catch (error) {
       console.log(error)
     }
@@ -75,7 +78,7 @@ export function MenuProvider({ children }) {
   }
 
     return (
-    <MenuContext.Provider value={{messages,setMessages,isLoading,errors,setIsLoading,getMenus,menus,menusPublisheds,getMenusIsPublished}}>
+    <MenuContext.Provider value={{updateMenu,deleteMenu,getMenu,createMenu,messages,setMessages,isLoading,errors,setIsLoading,getMenus,menus,menusPublisheds,getMenusIsPublished}}>
       {children}
     </MenuContext.Provider>
   );

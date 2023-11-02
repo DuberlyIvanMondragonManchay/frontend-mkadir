@@ -52,7 +52,6 @@ export default function FormRestaurant() {
         setIsLoading(false);
       }
     }, [restaurant_id, restaurant, getRestaurant,imageUrl]);
-    
 
     const handleChangeImage = async (e) => {
       setLoadingImage(true)
@@ -122,8 +121,6 @@ export default function FormRestaurant() {
         onSubmit={async (values) => {
           values.logo_url=imageUrl?imageUrl:""
           if (restaurant_id) {
-            console.log("Updated..")
-            console.log(values)
             try {
               updateRestaurant(restaurant_id,values)
               setMessages({text:"Datos actualizados correctamente",color:"success"})

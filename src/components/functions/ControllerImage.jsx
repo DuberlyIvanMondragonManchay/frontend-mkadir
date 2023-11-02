@@ -5,7 +5,6 @@ export const uploadFileImage = async (img, clicksCount, setClicksCount) => {
     if (validateExtension(img)) {
         // selection for the first time
         if(clicksCount <=0){
-            console.log("First time")
             if(window.localStorage.getItem('image_name')){
                 try {
                     deleteImage(window.localStorage.getItem('image_name'))
@@ -13,8 +12,8 @@ export const uploadFileImage = async (img, clicksCount, setClicksCount) => {
                     
                   }
                 window.localStorage.removeItem('image_name')
-                window.localStorage.setItem('image_name',v4())
             }
+            window.localStorage.setItem('image_name',v4())
         }
         // Create name image
         const urlImage = await uploadImage(img,window.localStorage.getItem('image_name'));
@@ -22,6 +21,12 @@ export const uploadFileImage = async (img, clicksCount, setClicksCount) => {
         return urlImage;
     }
   };
+
+  export const uploadFileImage2 = async (img) => {
+    if (validateExtension(img)) {
+        return await uploadImage(img,v4());   
+    }
+}
 
 
 const validateExtension =  (img) => {
