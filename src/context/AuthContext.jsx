@@ -3,7 +3,7 @@ import { getUserRequest, loginRequest, logoutRequest, registerRequest, verifyPas
 import { createResturantsRequest, getResturantRequest } from "../api/Restaurant.pi";
 import { useNavigate } from "react-router-dom";
 // import Cookies from 'universal-cookie';
-
+import Cookies from 'js-cookie'
 const AuthContext = createContext();
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
@@ -52,12 +52,13 @@ export function AuthProvider({ children }) {
       return res
     }
 
-    const logout = async() => {
+    const logout = async () => {
       await logoutRequest();
-      setIsLoading(false);
-      deleteCookie('jwt'); // Elimina la cookie llamada 'jwt'
+      Cookies.remove('jwt')
+      console.log(Cookies.get())
       return navigateTo('/');
-    } 
+    }
+    
 
   // Eliminar errores despues de 5 segundos
   useEffect(() => {

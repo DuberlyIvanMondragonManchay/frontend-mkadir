@@ -6,7 +6,7 @@ export default function CardAdmin(props){
     const handleClick=()=> navigateTo(props.card_url)
     return (
         <div onClick={handleClick} className="flex justify-center text-center flex-col w-full shadow-md cursor-pointer mt-2">
-            <img className="m-auto" style={{width:"50px",height:"50px"}} src={props.card_img} alt={`image logo` + props.card_title} />
+            {<props.card_icon style={{ color:"#307A59" }} className="text-4xl m-auto mt-2"/>}
             <p>{props.card_title}</p>
         </div>
     )

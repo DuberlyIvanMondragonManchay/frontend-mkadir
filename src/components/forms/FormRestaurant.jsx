@@ -269,7 +269,7 @@ export default function FormRestaurant() {
                       value={values.password}
                       className='color-text p-4 w-full py-2 mt-2 px-3 border-2 rounded-md border-gray-400 outline-none focus:border-blue-800' required/>
                       <button type="submit" className="w-full mt-2 text-white bg-red-600 hover:bg-red-700 focus:ring-red-300 font-medium rounded-lg text-sm items-center px-5 py-2.5 mr-2">
-                            Eliminar
+                        {isSubmitting?"Eliminando...":"Eliminar"}
                         </button>
                     </form>
                   )}

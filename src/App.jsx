@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css'
+import './styles/Styles.css'
 import { AuthProvider } from './context/AuthContext'
 import { RegisterProvider } from './context/RegisterContext'
 import { RestaurantProvider } from './context/RestaurantContext'

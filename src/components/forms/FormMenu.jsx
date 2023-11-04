@@ -2,25 +2,29 @@ import { Formik } from 'formik'
 import React,{useEffect, useRef,useState} from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { InputForm } from '../specific/ComponentsForm'
-import { toast,Toaster } from 'sonner';
- 
 import { RiAdminFill } from 'react-icons/ri';
 // Icons
 import {MdCloudUpload} from 'react-icons/md';
-import { uploadFileImage, uploadFileImage2 } from '../functions/ControllerImage';
+import {uploadFileImage2 } from '../functions/ControllerImage';
 import SpinerComponent from '../SpinerComponent';
 import { useMenuContext } from '../../context/MenuContext';
 import { deleteImage2 } from '../../firebase/config';
 
+// Warning modal
+import WarningModal from '../modals/WarningModal'
+import { Toaster,toast } from 'sonner';
+
 export default function FormMenu() {
   const {menu_id,restaurant_id} = useParams()
-  const {createMenu,getMenu,setIsLoading,isLoading,updateMenu} = useMenuContext()
+  const {createMenu,getMenu,setIsLoading,isLoading,updateMenu,deleteMenu} = useMenuContext()
   const navigateTo = useNavigate()
   const inputFileRef = useRef(null);
   const [fileImg,setFileImg] = useState(null)
   const [imageUrl,setImageUrl] = useState(null)
   const [clicksCount, setClicksCount] = useState(0);
-  const [loadingImage,setLoadingImage] = useState(false)//Loading
+  const [loadingImage,setLoadingImage] = useState(false)//Loading 
+  const [changeImage,setChangeImage] = useState(false)//Is Change image
+
   const [menu,setMenu] = useState(null)
 
 
@@ -29,6 +33,7 @@ export default function FormMenu() {
   };
 
   const handleChangeImage = async (e) => {
+    setChangeImage(true) //Yes is change image
     setLoadingImage(true)
     const img = e.target.files[0];
     if(img){
@@ -53,6 +58,9 @@ export default function FormMenu() {
       }
 
   },[menu_id,menu,getMenu,imageUrl])
+
+  //  DELETE MENU
+
   if(isLoading && !menu) return <div className='flex justify-center mt-6'><SpinerComponent/></div>
   return (
     <div>
@@ -73,17 +81,18 @@ export default function FormMenu() {
             img_menu_url:""}
         }
         onSubmit={async (values) => {
-            let resImg_url = await uploadFileImage2(fileImg, clicksCount, setClicksCount);
-            values.img_menu_url = resImg_url;
-          
+            
             if (menu_id) {
-              console.log(values);
+                if(changeImage){
+                    let resImg_url = await uploadFileImage2(fileImg, clicksCount, setClicksCount);
+                    values.img_menu_url = resImg_url;
+                    await deleteImage2(menu.img_menu_url); // Delete Firebase image
+                }
               const res = await updateMenu(restaurant_id, menu_id, values);
-              if (menu && menu.img_menu_url) {
-                await deleteImage2(menu.img_menu_url); // Delete Firebase image only if menu.img_menu_url is defined
-              }
               if (res.data) return navigateTo(`/admin/restaurants/${restaurant_id}/menus/`);
             } else {
+              const resImg_url = await uploadFileImage2(fileImg, clicksCount, setClicksCount);
+              values.img_menu_url = resImg_url;
               const res = await createMenu(restaurant_id, values);
               if (res.data) return navigateTo(`/admin/restaurants/${restaurant_id}/menus/`);
             }
@@ -157,9 +166,30 @@ export default function FormMenu() {
 
                 </form>
             )}
-
         </Formik>
-    <Toaster/>
+
+        {/* Delete menu modal */}
+        {menu_id?
+      <div className='flex justify-center mt-5'>
+              <WarningModal
+              titleButtonModal="Eliminar Menú"
+              textHeaderComponent={<p className='py-3 pl-3 font-semibold'><span className='text-red-500'>Eliminar/menú </span></p>}
+              textModalComponent={
+                <div>
+                <p className='mb-2'>¿Desea eliminar este menú?</p>
+                    <button onClick={async()=> {
+                        await deleteMenu(restaurant_id,menu_id)
+                        navigateTo(`/admin/restaurants/${restaurant_id}/menus`)
+                        }} type="button" className="w-full mt-2 text-white bg-red-600 hover:bg-red-700 focus:ring-red-300 font-medium rounded-lg text-sm items-center px-5 py-2.5 mr-2">
+                        Eliminar
+                    </button>
+              </div>
+              }
+              />
+      </div>:null}
+
+      <Toaster/>
     </div>
+
   )
 }
