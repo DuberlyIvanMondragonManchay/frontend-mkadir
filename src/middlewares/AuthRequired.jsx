@@ -13,7 +13,7 @@ export default function AuthRequired(props) {
         <div className='flex justify-center items-center flex-col'>
             <p className='text-center'>Bienvenido!! has click para continuar</p>
             <button onClick={handleClick} className='glow-on-hover mt-2'>Continuar</button> 
-            <button onClick={()=>navigateTo('/login')} className='glow-on-hover mt-2'>login</button> 
+            <button onClick={()=>navigateTo('/auth/login')} className='glow-on-hover mt-2'>login</button> 
         </div>
     )
 
