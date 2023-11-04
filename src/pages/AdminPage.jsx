@@ -17,12 +17,10 @@ export default function AdminPage() {
 
       <div className="grid grid-cols-2 gap-4">
         <CardAdmin 
-        card_img={activeUser}
         card_icon={FcManager}
         card_title = "Mi cuenta"
         />
         <CardAdmin 
-        card_img={activeRestaurant}
         card_title = "Mis restaurantes"
         card_icon={FaStore}
         card_url="restaurants/"

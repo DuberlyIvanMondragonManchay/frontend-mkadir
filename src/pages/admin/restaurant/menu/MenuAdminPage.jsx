@@ -25,7 +25,7 @@ export default function MenuAdminPage() {
 
   const handleGetmenu=(restaurant_id,menu_id)=>{
     console.log("get menu")
-      return navigateTo(`/admin/restaurants/${restaurant_id}/menus/update/${menu_id}`)
+    return navigateTo(`/admin/restaurants/${restaurant_id}/menus/update/${menu_id}`)
   }
 
   return (

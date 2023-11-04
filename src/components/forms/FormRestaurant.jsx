@@ -7,13 +7,12 @@ import CardAdmin from '../cards/CardAdmin'
 import WarningModal from '../modals/WarningModal'
 // Iconos
 import { RiAdminFill } from 'react-icons/ri'
-import menu from '../../imgs/icons/menu.svg'
 import employees from '../../imgs/icons/employees.svg'
-import food from '../../imgs/icons/food.svg'
-import schedule from '../../imgs/icons/schedule.svg'
 import { useAuth } from '../../context/AuthContext'
 import img_default_profile_resturant from '../../imgs/img_default_profile_resturant.svg'
 import img_loading_profile from '../../imgs/gifs/img_loading_profile.gif'
+// Rect icons
+import {FcSurvey} from 'react-icons/fc'
 // Spiner
 import SpinerComponent from '../../components/SpinerComponent'
 // Image logo Controller 
@@ -235,10 +234,11 @@ export default function FormRestaurant() {
       {restaurant_id?
       <div className='flex gap-2  justify-center mt-3'>
           <div className="grid grid-cols-2 gap-4">
-            <CardAdmin card_img={employees} card_title = "Mis empleados"/>
-            <CardAdmin card_url={`/admin/restaurants/${restaurant_id}/menus`} card_img={menu} card_title = "Mi menú"/>
-            <CardAdmin card_img={schedule} card_title = "Horario de trabajo"/>
-            <CardAdmin card_img={food} card_title = "Mi platos"/>
+            <CardAdmin 
+              card_title = "Menús"
+              card_icon={FcSurvey}
+              card_url={`/admin/restaurants/${restaurant_id}/menus`}
+              />
             
           </div>
       </div>
