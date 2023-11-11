@@ -16,6 +16,6 @@ export const other_icons= {
     "logout":logout,
     "about":about,
     "information":information,
-    "advertising":advertising
+    "advertising":advertising,
 }
 

@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 
 export const ButtonPrimary=(props) =>{
-  // useEffect(()=>{
-  // },[props.disabled])
   return (
     <button
     type= {props.type? props.type : "submit"}
@@ -18,7 +16,7 @@ export const InputForm =(props)=>{
   return (
     <input 
     id={props.name}
-    className="color-text p-4 w-full py-4 mt-2 px-3 border-2 rounded-md border-gray-400 outline-none focus:border-green-800"
+    className="dark:bg-gray-950 dark:text-gray-100 p-4 w-full py-4 mt-2 px-3 border-2 rounded-md border-gray-400 outline-none focus:border-green-800"
     type={props.type?props.type:"text"} 
     placeholder={props.placeholder}
     name={props.name}
@@ -29,3 +27,18 @@ export const InputForm =(props)=>{
   )
 }
 
+export const InputFormPassword =(props)=>{
+    return (
+      <input 
+      id={props.name}
+      className="dark:bg-gray-950 dark:text-gray-100 p-4 w-full py-4 mt-2 px-3 border-2 rounded-md border-gray-400 outline-none focus:border-green-800"
+      type="password"
+      placeholder={props.placeholder}
+      name={props.name}
+      onChange={props.onChange}
+      value={props.value}
+      required={props.required}
+      minLength={5}
+      />
+    )
+}

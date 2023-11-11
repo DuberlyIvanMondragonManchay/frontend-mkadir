@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 export default function CardRestaurantAdmin(props) {
   const navigateTo = useNavigate()
   return (
-    <div onClick={() => navigateTo(`/restaurants/${props.card_id}`)} className="flex items-end mt-6 mb-4 rounded cursor-pointer bg-white shadow-xl p-2">
+    <div onClick={() => navigateTo(`/restaurants/${props.card_id}`)} className="flex items-end mt-6 mb-4 rounded cursor-pointer bg-white dark:bg-gray-950 dark:text-white shadow-xl p-2">
         <div className='h-full border-2 rounded-full overflow-hidden'>
             <img className="object-cover h-24 w-24" src={props.card_img} alt={`logo ${props.card_title}`} />
         </div>

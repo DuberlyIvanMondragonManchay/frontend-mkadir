@@ -11,8 +11,33 @@ export function AuthProvider({ children }) {
     const [errors,setErrors] = useState([])
     const [isLoading,setIsLoading] = useState(true)
     const navigateTo = useNavigate()
+    // -----THEME--------
+    const [theme, setTheme] = useState(() => {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        return "dark";
+      }
 
+      return "light";
+    });
 
+    useEffect(() => {
+      if (theme === "dark") {
+        document.querySelector("html").classList.add("dark");
+        document.getElementById('body_root').classList.remove("bg-slate-100");
+        document.getElementById('body_root').classList.add("bg-black");
+      } else {
+        document.querySelector("html").classList.remove("dark");
+        document.getElementById('body_root').classList.remove("bg-black");
+        document.getElementById('body_root').classList.add("bg-slate-100");
+      }
+    }, [theme]);
+    
+    const handleChangeTheme = () => {
+      setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    };
+    // -----THEME END--------
+
+    
     const registerUserAuth = async ()=> {
       try {
         const userData = await JSON.parse(window.localStorage.getItem('userRegister'))
@@ -38,10 +63,21 @@ export function AuthProvider({ children }) {
     const loginUserAuth = async (user) => {
       try {
         const res = await loginRequest(user)
+        setUser(res.data.user)
+        setIsLoading(false)
         return res
       } catch (error) {
         setErrors(error.response.data)
-        console.log(error.response.data)
+      }
+    }
+    const registerUser = async (user) => {
+      try {
+        const res = await registerRequest(user)
+        setUser(res.data)
+        console.log(res)
+        return res
+      } catch (error) {
+        setErrors(error.response.data)
       }
     }
 
@@ -90,7 +126,7 @@ export function AuthProvider({ children }) {
   },[user])
 
   return (
-    <AuthContext.Provider value={{logout,isLoading,registerUserAuth,errors,loginUserAuth,user,getRestaurant,restaurantData,verifyPassword}}>
+    <AuthContext.Provider value={{theme,handleChangeTheme,logout,isLoading,registerUserAuth,registerUser,errors,loginUserAuth,user,getRestaurant,restaurantData,verifyPassword}}>
       {children}
     </AuthContext.Provider>
   );

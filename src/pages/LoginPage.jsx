@@ -8,7 +8,7 @@ export default function LoginPage() {
   const {loginUserAuth,errors} = useAuth()
   const navigateTo = useNavigate()
   return (
-    <div className="max-w-md m-auto px-2">
+    <div className="max-w-md m-auto px-2 dark:text-white">
       {errors.length <= 0 ? "" : <Alert className="mt-3" severity="error">{errors}</Alert>}
       <h1 className="mt-3 color-text-primary font-semibold text-2xl text-center">
             <span className="color-text">¡Hola</span>, te damos la{" "}
@@ -21,9 +21,7 @@ export default function LoginPage() {
       }}
       onSubmit={async (values) => {
         const res= await loginUserAuth(values)
-        if(res.data){
-          return navigateTo('/profile') 
-        }
+        if(res.data)return navigateTo('/profile') 
       }}
     >
       {({ values, handleChange, handleSubmit, isSubmitting }) => (
@@ -55,7 +53,7 @@ export default function LoginPage() {
               required={true}
             />
           </div>
-          <p className='text-center'><Link to={"/auth/register/options"} className='color-text-primary underline font-semibold'>¡Regístrate</Link> en <b>Mkadir</b>!</p>
+          <p className='text-center'><Link to={"/auth/register/personal-data"} className='color-text-primary underline font-semibold'>¡Regístrate</Link> en <b>Mkadir</b>!</p>
           <ButtonPrimary
             disabled={isSubmitting}
             text={isSubmitting ? <div><SpinerComponent sizeSpiner="w-5 h-5" colorSpiner="fill-teal-500"/> Accediendo...</div> : "Acceder"}
@@ -63,6 +61,7 @@ export default function LoginPage() {
         </form>
       )}
     </Formik>
+    {/* <LoginWithGoogle/> */}
   </div>
   
   )

@@ -9,6 +9,7 @@ export default function Avatar(props) {
     <div className="relative">
       {props.logo_url !== null && props.logo_url.trim() !== '' ? (
         <img
+          style={{ minWidth:"40px" }}
           className="w-10 h-10 object-cover rounded-full ring-gray-300 dark:ring-gray-500 cursor-pointer"
           src={props.logo_url}
           alt="Medium avatar"

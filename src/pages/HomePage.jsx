@@ -55,8 +55,8 @@ export default function HomePage() {
         restaurant.name.toLowerCase().includes(search.toLowerCase())
       );
   return (
-  <div className="max-w-xl m-auto">
-      <CarrouselComponent className="sm:hidden"/>
+  <div className="max-w-xl m-auto ">
+      {/* <CarrouselComponent className="sm:hidden"/> */}
       {isLoading ?
       <div style={{ height:"400px" }} className="animate-pulse border shadow rounded-md p-4 max-w-xl w-full mx-auto">
         <div className=" flex space-x-4">

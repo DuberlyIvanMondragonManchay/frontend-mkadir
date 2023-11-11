@@ -26,17 +26,17 @@ export default function Navigation() {
   let location = useLocation();
   const [value, setValue] = React.useState(0);
   const navigateTo=useNavigate()
-  const {user,isLoading,restaurantData} = useAuth()
+  const {user,isLoading,restaurantData,theme} = useAuth()
   const [visibleSearch,setVisibleSeach] = useState(false)
   const {filteredRestaurants,search} = useRestaurantContext()
   const regex = /^\/restaurants\/\d+.*$/;
   const urlIsCorrect = regex.test(location.pathname) ///restaurnts/1/bla/bla/bla ... is true
   
   return ( 
-      <div className={`m-0 top-0 bg-white z-50 ${location.pathname!=="/"?"py-0":"py-2"}  px-2 fixed w-full mb-80`}>
+      <div className={`m-0 top-0 dark:bg-gray-950 bg-slate-100 dark:text-gray-100 z-50 ${location.pathname!=="/"?"py-0":"py-2"}  px-2 fixed w-full mb-80`}>
         {/* Logo and serach container*/}
         <div className="md:hidden flex items-center justify-between">
-              <div onClick={()=>navigateTo('/')} className="flex items-end"> {/* Contenedor izquierdo */}
+              <div onClick={()=>navigateTo('/')} className="mr-3 flex items-end"> {/* Contenedor izquierdo */}
                 <div className="mb-1 w-8 h-8">
                   <img className="w-full" src={logo} alt="mkadir logo" />
                 </div>
@@ -49,6 +49,12 @@ export default function Navigation() {
                 <BsSearch className="" onClick={()=>setVisibleSeach(!visibleSearch)} style={{ fontSize: '30px' }} />
               </div>
             :null}
+            {user?
+            // Avatar
+            <div className="justify-end md:hidden flex ml-3">
+              <Avatar logo_url={user.picture} name={user.name}/>
+            </div>
+            :null}
         </div>
 
 
@@ -56,16 +62,16 @@ export default function Navigation() {
           <nav className="py-4 flex md:justify-between justify-center items-center">
             {/* Logo and serach container*/}
             <div className={`flex items-center justify-between md:justify-start`}>
-              <div onClick={()=>navigateTo('/')} className=" hidden md:flex items-end"> {/* Contenedor izquierdo */}
+              <div onClick={()=>navigateTo('/')} className="hidden md:flex items-end"> {/* Contenedor izquierdo */}
                 <div className="mb-1 w-8 h-8">
                   <img className="w-full" src={logo} alt="mkadir logo" />
                 </div>
-                <h1 className={`text-xl font-bold`}>kadir</h1>
+                <h1 className={`text-xl font-bold`}>kadi2r</h1>
               </div>
               {/* Search */}
               {location.pathname=='/'?
               <div className="w-80 mx-1 md:flex hidden items-center justify-end"> {/* Contenedor derecho */}
-              <SearchComponent className={`${visibleSearch ? "visible-search" : "hidden-search"} md:ml-5`} value={search}  onChange={filteredRestaurants} />
+              <SearchComponent className={`${visibleSearch ? "visible-search" : "hidden-search"}`} value={search}  onChange={filteredRestaurants} />
                 <BsSearch className="md:hidden block" onClick={()=>setVisibleSeach(!visibleSearch)} style={{ fontSize: '30px' }} />
               </div>
             :null}
@@ -81,13 +87,13 @@ export default function Navigation() {
                   <Link to={`/restaurants/${restaurantData ? restaurantData.id : null}/employees`} className="col link-item"><img src={inactive_employees} alt="Employees Icon" /></Link>
                 </>
               )}
-            <BottomNavigation showLabels value={value} onChange={(event, newValue) => { setValue(newValue); }}>
-              <BottomNavigationAction onClick={() => navigateTo('/')} label="Home" style={{ color: value === 0 ? '#307A59' : null }} icon={<AiFillHome style={{ fontSize: 30, color: value === 0 ? '#307A59' : null }} />} />
-              <BottomNavigationAction onClick={() => navigateTo('/restaurants')} label="Restaurants" style={{ color: value === 1 ? '#307A59' : null }} icon={<FaStore style={{ fontSize: 30, color: value === 1 ? '#307A59' : null }} />} />
-              <BottomNavigationAction onClick={() => navigateTo('/profile')} label="Profile" style={{ color: value === 2 ? '#307A59' : null }} icon={<BiSolidUser style={{ fontSize: 30, color: value === 2 ? '#307A59' : null }} />} />
-              <BottomNavigationAction onClick={() => navigateTo('/admin')} label="Admin" style={{ color: value === 3 ? '#307A59' : null }} icon={<BiMenu style={{ fontSize: 30, color: value === 3 ? '#307A59' : null }} />} />
-            </BottomNavigation>
-
+              
+              <BottomNavigation style={{ background: theme === "dark" ? "#030712" : "#f0f2f5" }} showLabels value={value} onChange={(event, newValue) => { setValue(newValue); }}>
+                <BottomNavigationAction onClick={() => navigateTo('/')} label="Home" style={{ color: value === 0 ? '#307A59' : (theme === 'dark' ? "#ffffff" : "#444444") }} icon={<AiFillHome style={{ fontSize: 30, color: value === 0 ? '#307A59' : (theme === 'dark' ? "#ffffff" : "#444444") }} />} />
+                <BottomNavigationAction onClick={() => navigateTo('/restaurants')} label="Restaurants" style={{ color: value === 1 ? '#307A59' : (theme === 'dark' ? "#ffffff" : "#444444") }} icon={<FaStore style={{ fontSize: 30, color: value === 1 ? '#307A59' : (theme === 'dark' ? "#ffffff" : "#444444") }} />} />
+                <BottomNavigationAction onClick={() => navigateTo('/profile')} label="Profile" style={{ color: value === 2 ? '#307A59' : (theme === 'dark' ? "#ffffff" : "#444444") }} icon={<BiSolidUser style={{ fontSize: 30, color: value === 2 ? '#307A59' : (theme === 'dark' ? "#ffffff" : "#444444") }} />} />
+                <BottomNavigationAction onClick={() => navigateTo('/admin')} label="Admin" style={{ color: value === 3 ? '#307A59' : (theme === 'dark' ? "#ffffff" : "#444444") }} icon={<BiMenu style={{ fontSize: 30, color: value === 3 ? '#307A59' : (theme === 'dark' ? "#ffffff" : "#444444") }} />} />
+              </BottomNavigation>
 
             </div>
             :null}
