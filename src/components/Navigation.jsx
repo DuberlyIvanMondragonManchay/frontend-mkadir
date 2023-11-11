@@ -59,7 +59,7 @@ export default function Navigation() {
 
 
         {isLoading ? <SpinerComponent/> : 
-          <nav className="py-4 flex md:justify-between justify-center items-center">
+          <nav className="flex md:justify-between justify-center items-center">
             {/* Logo and serach container*/}
             <div className={`flex items-center justify-between md:justify-start`}>
               <div onClick={()=>navigateTo('/')} className="hidden md:flex items-end"> {/* Contenedor izquierdo */}

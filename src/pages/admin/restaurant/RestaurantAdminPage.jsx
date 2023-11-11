@@ -38,14 +38,14 @@ export default function RestaurantAdminPage() {
                         <Link to="/admin/restaurants/create" className='mt-2 py-2 px-4 bg-color-primary text-white rounded mr-2'>+ Nuevo</Link>
                     </div>
                 <div className='overflow-x-auto '>    
-                    <table style={{ width:"900px" }}  className="min-w-full mt-4 bg-white border text-center">
+                    <table style={{ width:"900px" }}  className="min-w-full mt-4 bg-white dark:bg-gray-950 dark:text-gray-50 border text-center">
                         <thead>
-                            <tr className='bg-green-200 '>
-                                <th className="px-4 py-2 border border-white text-gray-600">#</th>
-                                <th className="px-4 py-2 border border-white text-gray-600">Logo</th>
-                                <th className="px-4 py-2 border border-white text-gray-600">Nombre</th>
-                                <th className="px-4 py-2 border border-white text-gray-600">Estado</th>
-                                <th className="px-4 py-2 border border-white text-gray-600">Ubicación</th>
+                            <tr className='dark:bg-gray-950 bg-gray-300 text-gray-950 dark:text-gray-50'>
+                                <th className="px-4 py-2 border dark:border-gray-500">#</th>
+                                <th className="px-4 py-2 border dark:border-gray-500">Logo</th>
+                                <th className="px-4 py-2 border dark:border-gray-500">Nombre</th>
+                                <th className="px-4 py-2 border dark:border-gray-500">Estado</th>
+                                <th className="px-4 py-2 border dark:border-gray-500">Ubicación</th>
                             </tr>
                         </thead>
                         <tbody>

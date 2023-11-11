@@ -4,7 +4,10 @@ import CardRestaurant from '../components/cards/CardRestaurant';
 import { getPagesResturantsRequest } from '../api/Restaurant.pi';
 import { useRestaurantContext } from '../context/RestaurantContext';
 import NoResults from '../components/specific/NoResults';
+import { useAuth } from '../context/AuthContext';
+import {isObjectEmpty} from '../components/functions/ValidateFunctions'
 export default function HomePage() {
+  const {user} = useAuth()
   const [restaurants, setRestaurants] = useState([]);
   const [page, setPage] = useState(1);
   const [pagesCount, setPagesCount] = useState(2)
@@ -56,7 +59,9 @@ export default function HomePage() {
       );
   return (
   <div className="max-w-xl m-auto ">
-      {/* <CarrouselComponent className="sm:hidden"/> */}
+    {!user?
+      <CarrouselComponent className="sm:hidden mt-6"/>
+    :null}
       {isLoading ?
       <div style={{ height:"400px" }} className="animate-pulse border shadow rounded-md p-4 max-w-xl w-full mx-auto">
         <div className=" flex space-x-4">

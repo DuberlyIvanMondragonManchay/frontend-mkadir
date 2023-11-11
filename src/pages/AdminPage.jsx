@@ -12,7 +12,7 @@ import ButtonDarkMode from '../components/specific/ButtonDarkMode'
 // FcConferenceCall
 export default function AdminPage() {
   return (
-    <div>
+    <div className='mt-16'>
       <div className='justify-end flex md:hidden'>
         <ButtonDarkMode/>
       </div>

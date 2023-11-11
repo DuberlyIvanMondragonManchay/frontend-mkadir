@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function RegisterPage() {
   const [userGoogle,setUserGoogle] = useState({})
-  const {registerUser,errors} = useAuth()
+  const {registerUser,errors,theme} = useAuth()
   const navigateTo = useNavigate()
   // CLIENT ID
   const clientID = import.meta.env.VITE_APP_CLIENT_ID;
@@ -43,7 +43,7 @@ export default function RegisterPage() {
   ))
 
   return (
-    <div className={`${isObjectEmpty(userGoogle)?"border max-w-md":"max-w-xl"} flex flex-col items-center py-2 m-auto px-4`}>
+    <div className={`${isObjectEmpty(userGoogle)?"border max-w-md":"max-w-xl"} mt-2 flex flex-col items-center py-2 m-auto px-4`}>
       <h1 className="text-xl dark:text-gray-100 my-2">
         {isObjectEmpty(userGoogle)?
         "Has click para registrar tu cuenta!!":
@@ -61,7 +61,8 @@ export default function RegisterPage() {
       </div>
       : //OBJECT userGoogle is not Empty
       <div>
-      <Toaster theme="light" position="top-center" />
+      <Toaster theme={`${theme=="dark"?"light":"dark"}`} position="top-center" />
+
       <Formik
       initialValues={{  
         picture:'',

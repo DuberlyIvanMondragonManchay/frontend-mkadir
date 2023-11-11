@@ -19,7 +19,7 @@ export default function SidebarComonent() {
 
     }
   return (      
-    <aside id="sidebar-multi-level-sidebar" className={`bg-white mt-24 fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full md:translate-x-0`} aria-label="Sidebar">
+    <aside id="sidebar-multi-level-sidebar" className={` ${user?"mt-24":"mt-0"} bg-white fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full md:translate-x-0`} aria-label="Sidebar">
     <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-950">
         <ul className="space-y-2 font-medium">
 
