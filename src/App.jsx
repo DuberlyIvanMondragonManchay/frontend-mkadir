@@ -19,7 +19,7 @@ import RightSidebar from './components/RightSidebar'
             <MenuProvider>
               <Navigation/>
               <SidebarComonent/>
-                <div id='space_sidebar' className='pt-20 sm:mt-20 mt-4 px-2 md:p-16 md:ml-64 xl:mr-64'>
+                <div id='space_sidebar' className='pt-10 sm:mt-7 mt-4 px-2 md:p-16 md:ml-64 xl:mr-64'>
                   <Routes/>     
                 </div>
               <RightSidebar/>

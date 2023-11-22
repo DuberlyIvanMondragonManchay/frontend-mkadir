@@ -63,7 +63,7 @@ export default function HomePage() {
       <CarrouselComponent className="sm:hidden"/>
     :null}
       {isLoading ?
-      <div style={{ height:"400px" }} className="animate-pulse border shadow rounded-md p-4 max-w-xl w-full mx-auto">
+      <div style={{ height:"400px" }} className="sm:mt-0 mt-16 animate-pulse border shadow rounded-md p-4 max-w-xl w-full mx-auto">
         <div className=" flex space-x-4">
           <div className="rounded-full bg-slate-200 h-10 w-10"></div>
             <div className="flex-1 space-y-6 py-1">

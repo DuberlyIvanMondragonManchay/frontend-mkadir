@@ -64,7 +64,7 @@ export default function FormMenu() {
   if(isLoading && !menu) return <div className='flex justify-center mt-6'><SpinerComponent/></div>
   return (
     <div>
-        <h2 className = "text-xl font-bold color-text-primary flex justify-center gap-1"><RiAdminFill />Administrar restaurante/ <span className='text-black'>{menu_id?"Editar":"Crear"} Menú</span></h2>
+        <h2 className = "text-xl font-bold color-text-primary flex justify-center gap-1"><RiAdminFill />Administrar restaurante/ <span className='text-black dark:text-white'>{menu_id?"Editar":"Crear"} Menú</span></h2>
         {console.log(isLoading)}
         <Formik 
         enableReinitialize ={true}
@@ -112,8 +112,8 @@ export default function FormMenu() {
                         className="flex flex-col items-center border-2 border-green-500 rounded p-4 cursor-pointer transition duration-300 hover:bg-green-500 hover:text-white"
                         onClick={handleDivClick}
                         >
-                        <MdCloudUpload className="text-4xl mb-2" />
-                        <label className="text-lg font-bold">{menu_id?"Actualizar":"Subir"} imagen</label>
+                        <MdCloudUpload className="text-4xl mb-2 dark:text-white" />
+                        <label className="text-lg font-bold dark:text-white">{menu_id?"Actualizar":"Subir"} imagen</label>
                         <input
                             onChange={handleChangeImage}
                             type="file"

@@ -23,7 +23,7 @@ export default function GetRestaurantsPage() {
 
   return (
     <div className=''>
-        <h1 className='text-3xl mb-2 text-center mt-5'>Mis Restaurantes</h1>
+        <h1 className='text-3xl mb-2 text-center mt-5 dark:text-white'>Mis Restaurantes</h1>
         <SearchComponent value={search} onChange={searcher}/>
         <div className='mt-2 grid grid-cols-1 xl:grid-cols-3 mx-4 xl:gap-2'>
           {
