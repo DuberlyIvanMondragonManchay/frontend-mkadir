@@ -10,8 +10,10 @@ import Menu from '../components/restaurat/Menu'
 import Location from '../components/restaurat/Location'
 import AuthRequired from '../middlewares/AuthRequired';
 import GetRestaurantPage from '../pages/restaurant/GetRestaurantPage';
+
 const employees_routes = [
-  { path: "", element: <GetEmployeesPage/> }
+  { path: "", element:<GetEmployeesPage/>},
+
 ]
 
 const work_schedule_routes = [

@@ -38,7 +38,7 @@ export default function Navigation() {
         <div className="md:hidden flex items-center justify-between">
               <div onClick={()=>navigateTo('/')} className="mr-3 flex items-end"> {/* Contenedor izquierdo */}
                 <div className="mb-1 w-8 h-8">
-                  <img className="w-full" src={logo} alt="mkadir logo" />
+                  <img className="w-full" src={logo} alt="ridark logo" />
                 </div>
                 <h1 className={`text-xl font-bold`}>kadir</h1>
               </div>
@@ -59,14 +59,14 @@ export default function Navigation() {
 
 
         {isLoading ? <SpinerComponent/> : 
-          <nav className="flex md:justify-between justify-center items-center">
+          <nav className="flex md:justify-between justify-center items-center py-3">
             {/* Logo and serach container*/}
             <div className={`flex items-center justify-between md:justify-start`}>
               <div onClick={()=>navigateTo('/')} className="hidden md:flex items-end"> {/* Contenedor izquierdo */}
-                <div className="mb-1 w-8 h-8">
+                <div className="w-16 h-16 ">
                   <img className="w-full" src={logo} alt="mkadir logo" />
                 </div>
-                <h1 className={`text-xl font-bold`}>kadi2r</h1>
+                <h1 className={`text-xl font-bold`}>kadir</h1>
               </div>
               {/* Search */}
               {location.pathname=='/'?
@@ -79,15 +79,7 @@ export default function Navigation() {
 
             {/* Links */}
             {user?
-            <div className="flex flex-row items-center justify-center gap-4 text-center">
-              {urlIsCorrect && (
-                <>
-                  <Link to={`/restaurants/${restaurantData ? restaurantData.id : null}/work-schedule`} className="col link-item"><img src={inactive_timetable} alt="Timetable Icon" /></Link>
-                  <Link to='/restaurants/menu' className="col link-item"><img src={inactive_menu} alt="Menu Icon" /></Link>
-                  <Link to={`/restaurants/${restaurantData ? restaurantData.id : null}/employees`} className="col link-item"><img src={inactive_employees} alt="Employees Icon" /></Link>
-                </>
-              )}
-              
+            <div className="flex flex-row items-center justify-center gap-4 text-center">              
               <BottomNavigation style={{ background: theme === "dark" ? "#030712" : "#f0f2f5" }} showLabels value={value} onChange={(event, newValue) => { setValue(newValue); }}>
                 <BottomNavigationAction onClick={() => navigateTo('/')} label="Home" style={{ color: value === 0 ? '#307A59' : (theme === 'dark' ? "#ffffff" : "#444444") }} icon={<AiFillHome style={{ fontSize: 30, color: value === 0 ? '#307A59' : (theme === 'dark' ? "#ffffff" : "#444444") }} />} />
                 <BottomNavigationAction onClick={() => navigateTo('/restaurants')} label="Restaurants" style={{ color: value === 1 ? '#307A59' : (theme === 'dark' ? "#ffffff" : "#444444") }} icon={<FaStore style={{ fontSize: 30, color: value === 1 ? '#307A59' : (theme === 'dark' ? "#ffffff" : "#444444") }} />} />
