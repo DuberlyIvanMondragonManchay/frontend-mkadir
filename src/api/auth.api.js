@@ -6,3 +6,4 @@ export const verifyPasswordRequest = async (user) => await axios.post('auth/veri
 export const logoutRequest = async () => await axios.post('auth/logout');
 export const getUserCodeRequest = async (user_code) => await axios.get(`auth/get_user_code/${user_code}`);
 
+

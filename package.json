@@ -50,5 +50,10 @@
     "postcss-nesting": "^12.0.1",
     "tailwindcss": "^3.3.3",
     "vite": "^4.4.5"
-  }
+  },
+  "description": "Proyecto integrador client\r ##### npm install => Instalar las dependencias\r ##### npm run dev => Ejecutar la app",
+  "main": "postcss.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
