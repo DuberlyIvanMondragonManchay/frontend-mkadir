@@ -40,7 +40,7 @@ export default function MenuAdminPage() {
                 <Link to={`/admin/restaurants/${restaurant_id}/menus/create`} className='mt-2 py-2 px-4 bg-color-primary text-white rounded mr-2'>+ Nuevo</Link>
             </div>
         <div className='overflow-x-auto '>    
-            <table style={{ width:"900px" }}  className="min-w-full mt-4 bg-white border text-center">
+            <table style={{ width:"900px" }}  className="min-w-full mt-4 dark:bg-black dark:text-white bg-white border text-center">
                 <thead>
                     <tr className='bg-green-200 '>
                         <th className="px-4 py-2 border border-white text-gray-600">#</th>
@@ -52,7 +52,7 @@ export default function MenuAdminPage() {
                 </thead>
                 <tbody>
                     {results.map((menu, index) => (
-                        <tr onClick={()=>handleGetmenu(restaurant_id,menu.id)} key={index} className="hover:bg-gray-200 text-center cursor-pointer">
+                        <tr onClick={()=>handleGetmenu(restaurant_id,menu.id)} key={index} className="dark:hover:bg-gray-900 hover:bg-gray-200 text-center cursor-pointer">
                             <td className="border px-4 py-2">{index + 1}</td>
                             <td className="border px-4 py-1">
                                 <div className='flex justify-center items-center'>

@@ -64,7 +64,7 @@ export default function FormMenu() {
   if(isLoading && !menu) return <div className='flex justify-center mt-6'><SpinerComponent/></div>
   return (
     <div>
-        <h2 className = "text-xl font-bold color-text-primary flex justify-center gap-1"><RiAdminFill />Administrar restaurante/ <span className='text-black dark:text-white'>{menu_id?"Editar":"Crear"} Menú</span></h2>
+        <h2 className = "text-xl font-bold color-text-primary flex justify-center gap-1"><RiAdminFill />Administrar menú/ <span className='text-black dark:text-white'>{menu_id?"Editar":"Crear"} Menú</span></h2>
         {console.log(isLoading)}
         <Formik 
         enableReinitialize ={true}

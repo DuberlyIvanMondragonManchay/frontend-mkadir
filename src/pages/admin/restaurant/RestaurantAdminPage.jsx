@@ -50,7 +50,7 @@ export default function RestaurantAdminPage() {
                         </thead>
                         <tbody>
                             {results.map((restaurant, index) => (
-                                <tr onClick={()=>handleGetRestaurant(restaurant.id)} key={index} className="hover:bg-gray-200 text-center cursor-pointer">
+                                <tr onClick={()=>handleGetRestaurant(restaurant.id)} key={index} className="hover:bg-gray-200 dark:hover:bg-gray-900 text-center cursor-pointer">
                                     <td className="border px-4 py-2">{index + 1}</td>
                                     <td className="border px-4 py-2">
                                         <div className='flex justify-center items-center'>
