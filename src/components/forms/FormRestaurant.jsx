@@ -239,7 +239,12 @@ export default function FormRestaurant() {
               card_icon={FcSurvey}
               card_url={`/admin/restaurants/${restaurant_id}/menus`}
               />
-            
+            <CardAdmin 
+             card_title = "Mis empleados"
+             card_icon={FcSurvey}
+             card_url={`/admin/restaurants/${restaurant_id}/employees`}
+             />
+
           </div>
       </div>
         :null}
