@@ -7,7 +7,7 @@ export default function AuthRequired(props) {
     const navigateTo = useNavigate()
     if(isLoading) return <h1>Loading...</h1> 
     if(!user) return (
-        <div className='dark:text-white flex justify-center items-center flex-col'>
+        <div className='dark:text-white flex justify-center items-center flex-col border'>
             <p className='text-center'>Autenticación requerida</p>
             <button onClick={()=>navigateTo('/auth/login')} className='glow-on-hover mt-2'>login</button> 
         </div>

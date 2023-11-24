@@ -27,8 +27,8 @@ export default function RestaurantAdminPage() {
 
     if (restaurant_id) return <LoadingPage/>
     return (
-        <div className="overflow-x-auto mx-1">
-            <h1 className="text-2xl my-5 text-center">Administrar mis Restaurantes</h1>
+        <div className="overflow-x-auto mx-1 sm:mt-0 mt-10">
+            <h1 className="text-2xl mb-4 text-center dark:text-white">Administrar mis Restaurantes</h1>
             {isLoading? <div className='mt-10'><SpinerComponent/></div>: 
             restaurants?
             restaurants.length > 0 ? 

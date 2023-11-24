@@ -80,13 +80,14 @@ export default function RegisterPage() {
         if(values.password === values.confirm_password){
           // SEPARAR APELLIDOS
           console.log(userGoogle)
-          const [firstName,lastName,firstSurName, lastSurName] = userGoogle.givenName.split(" ");
+          const [firstName,lastName,firstSurName, lastSurName] = userGoogle.name.split(" ");
           values.picture = userGoogle.imageUrl
           values.email = userGoogle.email
           values.username = userGoogle.email
           values.name = firstName + lastName
-          values.maternal_surname = lastSurName
-          values.paternal_surname = firstSurName
+          values.maternal_surname = lastSurName || "nulo"
+          values.paternal_surname = firstSurName | "nulo"
+          console.log(values)
           const res = await registerUser(values)//register database
           if(res.data) return navigateTo('/profile')
         }else {

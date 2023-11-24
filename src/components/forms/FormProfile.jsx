@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function FormProfile() {
   return (
-    <div>FormProfile</div>
+    <div className='dark:text-white text-center'>En desarrollo</div>
   )
 }

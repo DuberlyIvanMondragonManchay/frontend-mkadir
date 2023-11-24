@@ -77,6 +77,7 @@ export function AuthProvider({ children }) {
         console.log(res)
         return res
       } catch (error) {
+        console.log(error)
         setErrors(error.response.data)
       }
     }

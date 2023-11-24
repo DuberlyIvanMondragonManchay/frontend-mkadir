@@ -4,7 +4,7 @@ export default function ProfilePageIndex() {
   const { user,isLoading } = useAuth()
   if(isLoading) return <h1>Loadins...</h1>
   return (
-    <div className="dark:bg-gray-950 dark:text-white w-full mx-auto h-full shadow-lg rounded-lg overflow-hidden">
+    <div className="mt-8 dark:bg-gray-950 dark:text-white w-full mx-auto h-full shadow-lg rounded-lg overflow-hidden">
       <h1 className='text-2xl mb-2 text-center'>Mi perfil</h1>
       <div className="bg-gray-300 dark:bg-gray-700 h-40"></div> {/* Portada gris */}
       {!user.picture? 
