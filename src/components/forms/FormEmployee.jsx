@@ -151,7 +151,7 @@ export default function FormEmployee() {
                                 navigateTo(`/admin/restaurants/${restaurant_id}/employees`)
                             } else {
                                 console.error("Error al crear el empleado:")
-                                toast("El usuario ya existe")
+                                toast("Ups ocurrio un error")
                             }
                         }else{
                             toast("El usuario es requerido")
@@ -192,7 +192,7 @@ export default function FormEmployee() {
                         
                         <div className="my-3 flex justify-center">
                             <label htmlFor='role'><b>Rol</b></label>
-                            <select onChange={handleChange} value={values.role} id="role" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <select required onChange={handleChange} value={values.role} id="role" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 {roles?roles.map((role, index) => (
                                     <option key={index} value={role.id}>{role.name}</option>
 
