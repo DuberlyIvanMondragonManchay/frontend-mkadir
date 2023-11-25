@@ -91,8 +91,8 @@ export default function FormRestaurant() {
   }
   if (isLoading && !restaurant) return <SpinerComponent/>
     return (
-      <div className = "max-w-md m-auto">
-      <h2 className = "text-xl font-bold color-text-primary flex justify-center gap-1"><RiAdminFill />Administrar restaurante/ <span className='text-black'>{restaurant_id?"Editar":"Crear"}</span></h2>
+      <div className = "max-w-md m-auto pt-16 md:pt-0">
+      <h2 className = "text-xl font-bold color-text-primary flex justify-center gap-1"><RiAdminFill />Administrar restaurante/ <span className='text-black dark:text-white'>{restaurant_id?"Editar":"Crear"}</span></h2>
       {imageError === null ? "" : <Alert className="mt-3" severity="error">{imageError}</Alert>}
       
       {messages === null ? "" : <Alert className="mt-3" severity={messages.color}>{messages.text}</Alert>}
@@ -137,7 +137,7 @@ export default function FormRestaurant() {
         }}
       >
         {({ values, handleChange, handleSubmit, isSubmitting}) => (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className='dark:text-white'>
           <div className="my-3 flex justify-center">
             <label htmlFor="logo_url" style={{ width: "100px", height: "100px" }} className={`border flex rounded-full overflow-hidden  ${loadingImage?"bg-white":imageUrl?"bg-white":"bg-teal-600"} cursor-pointer`}>
               <img style={{ objectFit: "cover", width: "100%", height: "100%" }} 

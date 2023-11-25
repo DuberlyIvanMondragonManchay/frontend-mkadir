@@ -84,9 +84,9 @@ export default function RegisterPage() {
           values.picture = userGoogle.imageUrl
           values.email = userGoogle.email
           values.username = userGoogle.email
-          values.name = firstName + lastName
-          values.maternal_surname = lastSurName || "nulo"
-          values.paternal_surname = firstSurName | "nulo"
+          values.name = firstName || ""
+          values.maternal_surname = lastSurName || null
+          values.paternal_surname = firstSurName || null
           console.log(values)
           const res = await registerUser(values)//register database
           if(res.data) return navigateTo('/profile')

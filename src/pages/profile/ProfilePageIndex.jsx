@@ -17,7 +17,8 @@ export default function ProfilePageIndex() {
       <img src={user.picture} alt="Profile Picture" className="w-32 h-32 object-cover rounded-full border-4 border-white -mt-12 sm:-mt-16 mx-auto"/>
       }
       <div className="py-4 px-6 text-center">
-        <p className="text-lg font-semibold mb-2">{user.name} {user.paternal_surname} {user.maternal_surname} </p>
+        <p className="text-lg font-semibold mb-2">{user.name} {user.paternal_surname?user.paternal_surname:""} {user.maternal_surname?user.maternal_surname:""} </p>
+        <p className="text-sm font-semibold mb-2"><span className='text-green-500'>Código: </span>{user.user_code}</p>
       </div>
     </div>
 

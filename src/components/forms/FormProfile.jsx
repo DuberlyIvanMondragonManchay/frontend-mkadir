@@ -2,13 +2,11 @@ import React, { useState } from 'react'
 import {useAuth} from '../../context/AuthContext'
 import { Link, useNavigate  } from "react-router-dom";
 import { Formik } from "formik";
-import {ButtonPrimary,InputForm} from '../specific/ComponentsForm'
 import img_loading_profile from '../../imgs/gifs/img_loading_profile.gif'
 
 export default function FormProfile() {
   const {user} = useAuth()
   const [imageUrl,setImageUrl] = useState(null)
-  const [loading,setLoading] = useState(false)//Loading
   const [loadingImage,setLoadingImage] = useState(false)//Loading
   const [changeImage,setChangeImage] = useState(false)//Is Change image
   const [fileImg,setFileImg] = useState(null)
@@ -30,7 +28,7 @@ export default function FormProfile() {
   };
 
   return (
-    <div className="max-w-md m-auto px-2">
+    <div className="max-w-md m-auto px-2 pt-20 md:pt-0">
       <h2 className = "text-xl font-bold color-text-primary">Datos personales</h2>
 
     <Formik

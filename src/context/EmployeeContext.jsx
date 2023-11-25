@@ -4,21 +4,21 @@ import { getEmployeesRequest,getEmployeeRequest,deleteEmployeeRequest, createEmp
 const EmployeeContext = createContext();
 export function EmployeeProvider({ children }) {
     const [employees, setEmployees] = useState(null);
-    const [errors,setErrors] = useState([])
+    const [errors_employee,setErrors_employee] = useState([])
     const [messages,setMessages] = useState(null)
 
     const [isLoading,setIsLoading] = useState(true)
 
   // Eliminar errores despues de 5 segundos
   useEffect(() => {
-    if (errors.length > 0 || messages !== null) {
+    if (errors_employee.length > 0 || messages !== null) {
       const timer = setTimeout(() => {
-        setErrors([]);
+        setErrors_employee([]);
         setMessages(null)
       }, 3000);
       return () => clearTimeout(timer);
     }
-  }, [errors,messages]);
+  }, [errors_employee,messages]);
 
   const getEmployees = async (restaurant_id) => {
     try {
@@ -59,7 +59,7 @@ export function EmployeeProvider({ children }) {
       return res.data
     } catch (error) {
       console.error("Error al crear el empleado:", error);
-      setErrors(error.response.data)
+      setErrors_employee(error.response.data)
     }
   }
 
@@ -73,7 +73,7 @@ export function EmployeeProvider({ children }) {
   }
 
     return (
-        <EmployeeContext.Provider value={{messages,setMessages,isLoading,errors,getEmployee,deleteEmployee,getEmployees,employees,setIsLoading,createEmployee,updateEmployee}}>
+        <EmployeeContext.Provider value={{messages,setMessages,isLoading,errors_employee,getEmployee,deleteEmployee,getEmployees,employees,setIsLoading,createEmployee,updateEmployee}}>
       {children}
     </EmployeeContext.Provider>
   );

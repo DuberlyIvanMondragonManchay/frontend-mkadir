@@ -23,6 +23,7 @@ export const InputForm =(props)=>{
     onChange={props.onChange}
     value={props.value}
     required={props.required}
+    maxLength={props.maxLength}
     />
   )
 }
