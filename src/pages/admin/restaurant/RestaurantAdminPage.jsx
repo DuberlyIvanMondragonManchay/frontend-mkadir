@@ -29,7 +29,7 @@ export default function RestaurantAdminPage() {
     return (
         <div className="overflow-x-auto mx-1 sm:mt-0 mt-10">
             <h1 className="text-2xl mb-4 text-center dark:text-white">Administrar mis Restaurantes</h1>
-            {isLoading? <div className='mt-10'><SpinerComponent/></div>: 
+            {isLoading? <div className='mt-10 text-center'><SpinerComponent/></div>: 
             restaurants?
             restaurants.length > 0 ? 
             <div className="max-w-full text-end overflow-hidden">

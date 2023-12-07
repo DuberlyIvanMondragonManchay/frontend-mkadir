@@ -10,7 +10,7 @@ export default function WarningModal(props) {
 
       <div className={`${isVisible?"flex bg-gray-400/50":"hidden"} fixed inset-0 items-center justify-center z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full`}>
           <div className="relative w-full max-w-md max-h-full">
-              <div className="bg-white rounded-lg shadow dark:bg-gray-700">
+              <div className="bg-white rounded-lg shadow dark:bg-black dark:text-white">
 
                 <div className="flex justify-between border">
                     <div>{props.textHeaderComponent}</div>

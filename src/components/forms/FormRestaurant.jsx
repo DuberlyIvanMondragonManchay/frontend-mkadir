@@ -7,7 +7,6 @@ import CardAdmin from '../cards/CardAdmin'
 import WarningModal from '../modals/WarningModal'
 // Iconos
 import { RiAdminFill } from 'react-icons/ri'
-import employees from '../../imgs/icons/employees.svg'
 import { useAuth } from '../../context/AuthContext'
 import img_default_profile_resturant from '../../imgs/img_default_profile_resturant.svg'
 import img_loading_profile from '../../imgs/gifs/img_loading_profile.gif'
@@ -89,9 +88,9 @@ export default function FormRestaurant() {
       
     }
   }
-  if (isLoading && !restaurant) return <SpinerComponent/>
+  if (isLoading && !restaurant) return <div className='text-center'><SpinerComponent/></div>
     return (
-      <div className = "max-w-md m-auto pt-16 md:pt-0">
+      <div className = "max-w-md m-auto pt-4 md:pt-0">
       <h2 className = "text-xl font-bold color-text-primary flex justify-center gap-1"><RiAdminFill />Administrar restaurante/ <span className='text-black dark:text-white'>{restaurant_id?"Editar":"Crear"}</span></h2>
       {imageError === null ? "" : <Alert className="mt-3" severity="error">{imageError}</Alert>}
       
@@ -213,7 +212,7 @@ export default function FormRestaurant() {
   
             <div className='flex gap-2  justify-center'>
               {restaurant_id?
-              <button onClick={()=>navigateTo('/admin/restaurants')} type='button' className='border-2  bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded'>Cancelar</button>
+              <button onClick={()=>navigateTo('/admin/restaurants')} type='button' className='border-2  dark:text-black bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded'>Cancelar</button>
             :null}
               <button disabled={loadingImage||isSubmitting} type='submit' className={`${ loadingImage?"bg-teal-400 cursor-not-allowed":"bg-teal-500 hover:bg-teal-600 "} px-3 py-2 rounded text-white`}>
                 
@@ -250,7 +249,7 @@ export default function FormRestaurant() {
         :null}
       {/* Modal delete */}
       {restaurant_id?
-      <div className='flex justify-center mt-5'>
+      <div className='flex justify-center mt-5 mb-5'>
               <WarningModal
               titleButtonModal="Eliminar Restaurante"
               navigateToModal={'/admin/restaurants'}

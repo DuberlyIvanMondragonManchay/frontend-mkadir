@@ -32,9 +32,9 @@ export default function EmployeeAdminPage() {
     
     return (
         <div className="overflow-x-auto mx-1">
-            <h1 className="text-2xl my-5 text-center">Administrar mis Empleados</h1>
+            <h1 className="text-2xl my-5 text-center dark:text-white">Administrar mis Empleados</h1>
             {isLoading ? 
-                <div className='mt-10'><SpinerComponent/></div>:
+                <div className='mt-10 text-center'><SpinerComponent/></div>:
             results ? 
                 results.length > 0 ? 
                     <div className="max-w-full text-end overflow-hidden">

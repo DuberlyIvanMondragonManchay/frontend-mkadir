@@ -5,7 +5,6 @@ import { getPagesResturantsRequest } from '../api/Restaurant.pi';
 import { useRestaurantContext } from '../context/RestaurantContext';
 import NoResults from '../components/specific/NoResults';
 import { useAuth } from '../context/AuthContext';
-import {isObjectEmpty} from '../components/functions/ValidateFunctions'
 export default function HomePage() {
   const {user} = useAuth()
   const [restaurants, setRestaurants] = useState([]);
@@ -63,7 +62,7 @@ export default function HomePage() {
       <CarrouselComponent className="sm:hidden"/>
     :null}
       {isLoading ?
-      <div style={{ height:"400px" }} className="sm:mt-0 mt-16 animate-pulse border shadow rounded-md p-4 max-w-xl w-full mx-auto">
+      <div style={{ height:"400px" }} className="sm:mt-0 mt-5 animate-pulse border shadow rounded-md p-4 max-w-xl w-full mx-auto">
         <div className=" flex space-x-4">
           <div className="rounded-full bg-slate-200 h-10 w-10"></div>
             <div className="flex-1 space-y-6 py-1">

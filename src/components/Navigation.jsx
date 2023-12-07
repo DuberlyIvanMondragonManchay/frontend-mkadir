@@ -29,9 +29,16 @@ export default function Navigation() {
   const {user,isLoading,restaurantData,theme} = useAuth()
   const [visibleSearch,setVisibleSeach] = useState(false)
   const {filteredRestaurants,search} = useRestaurantContext()
-  const regex = /^\/restaurants\/\d+.*$/;
-  const urlIsCorrect = regex.test(location.pathname) ///restaurnts/1/bla/bla/bla ... is true
   
+  const space_sidebar = window.document.getElementById("space_sidebar")
+
+  if(space_sidebar){
+    if(user){
+      console.log(space_sidebar)
+      space_sidebar.classList.replace("pt-20","pt-28")
+    }
+  }
+
   return ( 
       <div className={`m-0 top-0 dark:bg-gray-950 bg-slate-100 dark:text-gray-100 z-50 ${location.pathname!=="/"?"py-0":"py-2"}  px-2 fixed w-full mb-80`}>
         {/* Logo and serach container*/}

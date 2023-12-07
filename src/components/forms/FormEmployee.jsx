@@ -99,9 +99,9 @@ export default function FormEmployee() {
     }
     setIsLoadingGetUserCode(false);
   };
-  if (isLoading && !employee) return <SpinerComponent />;
+  if (isLoading && !employee) return <div className="text-center"><SpinerComponent /></div>;
   return (
-    <div className="m-2 pt-16 md:pt-0">
+    <div className="m-2 md:pt-0">
       <Toaster position="top-center" />
       {console.log(errors_employee)}
       {errors_employee.length > 0 ? toast(errors_employee[0]) : null}
@@ -316,7 +316,7 @@ export default function FormEmployee() {
       </Formik>
       {/* Modal delete */}
       {employee_id ? (
-        <div className="flex justify-center mt-5">
+        <div className="flex justify-center mt-5 mb-5">
           <WarningModal
             titleButtonModal="Eliminar Empleado"
             navigateToModal={`/admin/restaurants/${restaurant_id}/employees`}
